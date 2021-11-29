@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/tiles/world.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/overworld/spr_spamtonrails.png" type="Texture" id=2]
@@ -16,7 +16,8 @@
 [ext_resource path="res://assets/sounds/shinkansen.ogg" type="AudioStream" id=14]
 [ext_resource path="res://assets/overworld/spr_cungadero.png" type="Texture" id=15]
 [ext_resource path="res://assets/materials/spamtonRail.tres" type="Material" id=16]
-[ext_resource path="res://objects/projectiles/projSpamtonHead.tscn" type="PackedScene" id=17]
+[ext_resource path="res://objects/battle/projectiles/SpamtonNEO/projSpamtonHead.tscn" type="PackedScene" id=17]
+[ext_resource path="res://objects/battle/USER_SOUL/USER_SOUL.tscn" type="PackedScene" id=18]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -260,10 +261,82 @@ tracks/19/keys = {
 "update": 0,
 "values": [ Vector2( 25, 12 ) ]
 }
+tracks/20/type = "value"
+tracks/20/path = NodePath("intro_minispamtons:position")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 158, 0 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("world/rails:visible")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("USER_SOUL:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -50, -28 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("USER_SOUL:visible")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("spamtonNEO:scale")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("spamtonNEO:visible")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "intro"
-length = 15.0
+length = 20.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("spamtonNEO:position")
 tracks/0/interp = 1
@@ -271,10 +344,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3.9, 4, 4.1, 4.8, 6 ),
-"transitions": PoolRealArray( 1, 0.241484, 1, 0.241484, 0.241484, 1 ),
+"times": PoolRealArray( 0, 3.9, 4, 4.1, 4.8, 6, 15.3, 15.5 ),
+"transitions": PoolRealArray( 1, 0.241484, 1, 0.241484, 0.241484, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -84, 0 ), Vector2( -10.68, 0 ), Vector2( -10.68, -5 ), Vector2( -10.68, 0 ), Vector2( -10.68, 0 ), Vector2( -10.68, -100 ) ]
+"values": [ Vector2( -84, 0 ), Vector2( -10.68, 0 ), Vector2( -10.68, -5 ), Vector2( -10.68, 0 ), Vector2( -10.68, 0 ), Vector2( -10.68, -100 ), Vector2( -10.68, -100 ), Vector2( 59, 2 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("world/Overlay:modulate")
@@ -295,9 +368,12 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 3.9 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 3.9, 17.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "ToggleAnimation"
+}, {
 "args": [  ],
 "method": "ToggleAnimation"
 } ]
@@ -458,10 +534,10 @@ tracks/15/loop_wrap = true
 tracks/15/imported = false
 tracks/15/enabled = true
 tracks/15/keys = {
-"times": PoolRealArray( 0, 10.8 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 10.8, 12.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ false, true, false ]
 }
 tracks/16/type = "value"
 tracks/16/path = NodePath("world/tilesetFloor:position")
@@ -522,6 +598,101 @@ tracks/20/keys = {
 "transitions": PoolRealArray( 1, 1, 23.4254, 1 ),
 "update": 0,
 "values": [ Vector2( 25, 12 ), Vector2( 25, 12 ), Vector2( 25, -94 ), Vector2( -49, -10 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("intro_minispamtons:position")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 11.5, 12.8 ),
+"transitions": PoolRealArray( 1, 2.92817, 1 ),
+"update": 0,
+"values": [ Vector2( 158, 0 ), Vector2( 158, 0 ), Vector2( 3, 0 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("world/rails:visible")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 12.8, 17.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("USER_SOUL:position")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 12.8, 16, 16.3, 16.4, 16.7, 16.8, 17 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -50, -28 ), Vector2( -50, -28 ), Vector2( -16, 0 ), Vector2( -16, 0 ), Vector2( -16, 32 ), Vector2( -16, 32 ), Vector2( -16, 15 ) ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("USER_SOUL:visible")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 12.8, 17.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/25/type = "method"
+tracks/25/path = NodePath("USER_SOUL")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 14, 16.3, 16.7, 17 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "AlphysPhoneCallActivate"
+}, {
+"args": [  ],
+"method": "WAIT_FOR_USER"
+}, {
+"args": [  ],
+"method": "WAIT_FOR_USER"
+}, {
+"args": [  ],
+"method": "WAIT_FOR_USER"
+} ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("spamtonNEO:scale")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 15.3, 15.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("spamtonNEO:visible")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 14.4, 17.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
 }
 
 [node name="spamtonNeoFight" type="Node2D"]
@@ -668,9 +839,62 @@ frame = 1
 playing = true
 
 [node name="intro_minispamtons" type="Node2D" parent="."]
+position = Vector2( 158, 0 )
 
-[node name="projSpamtonHead" parent="intro_minispamtons" instance=ExtResource( 17 )]
+[node name="TopRow" type="Node2D" parent="intro_minispamtons"]
+
+[node name="projSpamtonHead2" parent="intro_minispamtons/TopRow" instance=ExtResource( 17 )]
+position = Vector2( 18, 0 )
+
+[node name="projSpamtonHead3" parent="intro_minispamtons/TopRow" instance=ExtResource( 17 )]
+position = Vector2( 36, 0 )
+
+[node name="projSpamtonHead4" parent="intro_minispamtons/TopRow" instance=ExtResource( 17 )]
+position = Vector2( 54, 0 )
+
+[node name="projSpamtonHead5" parent="intro_minispamtons/TopRow" instance=ExtResource( 17 )]
+position = Vector2( 72, 0 )
+
+[node name="projSpamtonHead6" parent="intro_minispamtons/TopRow" instance=ExtResource( 17 )]
+position = Vector2( 90, 0 )
+
+[node name="MiddleRow" type="Node2D" parent="intro_minispamtons"]
+
+[node name="projSpamtonHead7" parent="intro_minispamtons/MiddleRow" instance=ExtResource( 17 )]
+position = Vector2( 0, 15 )
+
+[node name="projSpamtonHead8" parent="intro_minispamtons/MiddleRow" instance=ExtResource( 17 )]
+position = Vector2( 18, 15 )
+
+[node name="projSpamtonHead9" parent="intro_minispamtons/MiddleRow" instance=ExtResource( 17 )]
+position = Vector2( 36, 15 )
+
+[node name="projSpamtonHead10" parent="intro_minispamtons/MiddleRow" instance=ExtResource( 17 )]
+position = Vector2( 54, 15 )
+
+[node name="projSpamtonHead11" parent="intro_minispamtons/MiddleRow" instance=ExtResource( 17 )]
+position = Vector2( 72, 15 )
+
+[node name="BottomRow" type="Node2D" parent="intro_minispamtons"]
+
+[node name="projSpamtonHead8" parent="intro_minispamtons/BottomRow" instance=ExtResource( 17 )]
+position = Vector2( 18, 33 )
+
+[node name="projSpamtonHead9" parent="intro_minispamtons/BottomRow" instance=ExtResource( 17 )]
+position = Vector2( 36, 33 )
+
+[node name="projSpamtonHead10" parent="intro_minispamtons/BottomRow" instance=ExtResource( 17 )]
+position = Vector2( 54, 33 )
+
+[node name="projSpamtonHead11" parent="intro_minispamtons/BottomRow" instance=ExtResource( 17 )]
+position = Vector2( 72, 33 )
+
+[node name="projSpamtonHead12" parent="intro_minispamtons/BottomRow" instance=ExtResource( 17 )]
+position = Vector2( 90, 33 )
 
 [node name="spamtonNEO" parent="." instance=ExtResource( 3 )]
 position = Vector2( -84, 0 )
 scale = Vector2( -1, 1 )
+
+[node name="USER_SOUL" parent="." instance=ExtResource( 18 )]
+position = Vector2( -50, -28 )

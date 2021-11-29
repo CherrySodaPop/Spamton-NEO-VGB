@@ -1,0 +1,131 @@
+extends KinematicBody2D
+
+var disableSoul:bool = false;
+var disableMovement:bool = true;
+var canShoot:bool = false;
+var zapTimer:float = 0.0;
+var chargeTimer:float = 0.0;
+
+var health:int = 150;
+var damaged:bool = false;
+var invisTimer:float = 0.0;
+var flashTimer:float = 0.0;
+
+var movementActionStrength:float = 0.2;
+var speed = 60;
+
+var startMettatonFight:bool = false
+var startMettatonFightTimer:float = 0.0;
+
+var projMettaton = preload("res://objects/battle/projectiles/USER_SOUL/projMettatonPellet.tscn");
+var projMettatonCharged = preload("res://objects/battle/projectiles/USER_SOUL/projMettatonPelletCharged.tscn");
+
+var WAITING_FOR_USER:bool = false;
+var WAITING_FOR_USER_COUNT:int = 0;
+var WAITING_FOR_USER_TOTAL_COUNT:int = 0;
+
+func _ready():
+	$HitboxCollision.connect("area_entered",self,"_TouchingArea");
+
+func _process(delta):
+	
+	if (damaged):
+		invisTimer += delta;
+		flashTimer += delta;
+	
+	if (flashTimer >= 0.2):
+		$spriteJoint.visible = !$spriteJoint.visible;
+		flashTimer = 0.0;
+	
+	if (invisTimer >= 2.0):
+		damaged = false;
+		invisTimer = 0.0;
+		$spriteJoint.visible = true;
+		flashTimer = 0.0;
+	
+	if (!disableSoul):
+		HandleMovement(delta);
+		HandleShooting(delta);
+		
+	HandleMettatonFight(delta);
+	
+	WAITING_FOR_USER(delta);
+
+func HandleMovement(delta):
+	var vecVelocity:Vector2 = Vector2.ZERO;
+	
+	if (!disableMovement):
+		if (Input.get_action_strength("moveUp") > movementActionStrength):
+			vecVelocity += Vector2(0,-speed);
+		
+		if (Input.get_action_strength("moveDown") > movementActionStrength):
+			vecVelocity += Vector2(0,speed);
+		
+		if (Input.get_action_strength("moveLeft") > movementActionStrength):
+			vecVelocity += Vector2(-speed,0);
+			
+		if (Input.get_action_strength("moveRight") > movementActionStrength):
+			vecVelocity += Vector2(speed,0);
+			
+	move_and_slide(vecVelocity);
+
+func HandleShooting(delta):
+	zapTimer += delta;
+	if (canShoot):
+		
+		if (Input.is_action_pressed("confirm")):
+			chargeTimer += delta;
+		
+		if (Input.is_action_just_released("confirm")):
+			# default shooting
+			if (zapTimer >= 0.1 && chargeTimer <= 0.5):
+				var tmpObj = projMettaton.instance();
+				get_tree().root.add_child(tmpObj);
+				tmpObj.global_transform.origin = global_transform.origin + Vector2(4,0);
+				zapTimer = 0.0;
+			
+			# charged shot
+			if (chargeTimer > 0.5):
+				var tmpObj = projMettatonCharged.instance();
+				get_tree().root.add_child(tmpObj);
+				tmpObj.global_transform.origin = global_transform.origin + Vector2(4,0);
+			
+			chargeTimer = 0.0;
+	else:
+		chargeTimer = 0.0;
+	print(chargeTimer);
+
+func HandleMettatonFight(delta):
+	if (startMettatonFight):
+		$spriteJoint.rotation = lerp($spriteJoint.rotation,deg2rad(-90),0.5);
+		startMettatonFightTimer += delta;
+		
+	if (startMettatonFightTimer > 1.0):
+		$spriteJoint/sprite.animation = "SOUL_METTATON";
+
+func AlphysPhoneCallActivate():
+	startMettatonFight = true;
+
+func _TouchingArea(area:Area2D):
+	if (area && area.has_meta("projectileType") && area.get_meta("projectileType") == "ENEMY"):
+		if (!damaged):
+			if (area.has_meta("damageAmount")):
+				health -= area.get_meta("damageAmount");
+			damaged = true;
+			WAITING_FOR_USER_COUNT += 1
+			WAITING_FOR_USER_TOTAL_COUNT += 1;
+
+func WAIT_FOR_USER():
+	canShoot = true;
+	get_tree().current_scene.get_node("AnimationPlayer").stop(false);
+	WAITING_FOR_USER = true;
+
+func WAITING_FOR_USER(delta):
+	if (WAITING_FOR_USER):
+		if (WAITING_FOR_USER_COUNT == 5):
+			get_tree().current_scene.get_node("AnimationPlayer").play("intro");
+			WAITING_FOR_USER = false;
+			WAITING_FOR_USER_COUNT = 0;
+		if (!get_tree().current_scene.get_node("AnimationPlayer").is_playing() && WAITING_FOR_USER_TOTAL_COUNT == 15):
+			WAITING_FOR_USER = false;
+			get_tree().current_scene.get_node("AnimationPlayer").play("beginFight");

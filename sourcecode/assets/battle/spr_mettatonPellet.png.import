@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/USER_SOUL.png-d8661834c888f4ba126ab1cfd3be8a7a.stex"
+path="res://.import/spr_mettatonPellet.png-5fdfa1b80d205784d60402bf4574bec9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/battle/USER_SOUL.png"
-dest_files=[ "res://.import/USER_SOUL.png-d8661834c888f4ba126ab1cfd3be8a7a.stex" ]
+source_file="res://assets/battle/spr_mettatonPellet.png"
+dest_files=[ "res://.import/spr_mettatonPellet.png-5fdfa1b80d205784d60402bf4574bec9.stex" ]
 
 [params]
 
