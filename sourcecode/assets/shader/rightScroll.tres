@@ -1,0 +1,14 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float speedAmp : hint_range(0,3.0);
+
+void fragment()
+{
+	vec2 uv_changed = UV;
+	uv_changed.x += TIME * speedAmp;
+	vec4 c = texture(TEXTURE, uv_changed);
+	COLOR = c;
+} "

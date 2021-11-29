@@ -1,5 +1,8 @@
 extends Node
 
+var TURN_IT_UP_BABY:bool = false;
+var TURN_IT_UP_BABY_AMP:float = 0.0;
+
 func _ready():
 	pass
 

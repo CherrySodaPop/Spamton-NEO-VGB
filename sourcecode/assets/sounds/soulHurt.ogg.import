@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/soulHurt.ogg-f13640c35aea41a1f5b1c7408c97ecfa.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/soulHurt.ogg"
+dest_files=[ "res://.import/soulHurt.ogg-f13640c35aea41a1f5b1c7408c97ecfa.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

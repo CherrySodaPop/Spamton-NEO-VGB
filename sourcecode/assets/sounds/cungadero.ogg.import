@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cungadero.ogg-6d6c91099d8eb3d4a5273ba50099c663.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/cungadero.ogg"
+dest_files=[ "res://.import/cungadero.ogg-6d6c91099d8eb3d4a5273ba50099c663.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

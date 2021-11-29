@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/spamton_laugh_noise.ogg-2088f99b9c0c007a4ad33a3215650ffb.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/spamton_laugh_noise.ogg"
+dest_files=[ "res://.import/spamton_laugh_noise.ogg-2088f99b9c0c007a4ad33a3215650ffb.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/rudebusterLaunch.ogg-d8414c4e48e13ad3f29a3f63d8d5b99f.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/rudebusterLaunch.ogg"
+dest_files=[ "res://.import/rudebusterLaunch.ogg-d8414c4e48e13ad3f29a3f63d8d5b99f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

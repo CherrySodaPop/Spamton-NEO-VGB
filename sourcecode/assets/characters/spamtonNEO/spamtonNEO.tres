@@ -1,0 +1,58 @@
+[gd_resource type="SpriteFrames" load_steps=14 format=2]
+
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonHead0.png" type="Texture" id=1]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonHead1.png" type="Texture" id=2]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonHead2.png" type="Texture" id=3]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonBody.png" type="Texture" id=4]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonArmR.png" type="Texture" id=5]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonArmPipis.png" type="Texture" id=6]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonWingR.png" type="Texture" id=7]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonLeg.png" type="Texture" id=8]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonWingL.png" type="Texture" id=9]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_megaSpamton0.png" type="Texture" id=10]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_megaSpamton1.png" type="Texture" id=11]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_miniSpamton0.png" type="Texture" id=12]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_miniSpamton1.png" type="Texture" id=13]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "torso",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "wingL",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "head",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "wingR",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "arm",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "leg",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "miniHead",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "megaHead",
+"speed": 8.0
+} ]

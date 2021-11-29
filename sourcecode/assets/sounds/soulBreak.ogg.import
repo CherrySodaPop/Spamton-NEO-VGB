@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/soulBreak.ogg-955ee47628e25718d75314644026c1f8.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/soulBreak.ogg"
+dest_files=[ "res://.import/soulBreak.ogg-955ee47628e25718d75314644026c1f8.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
