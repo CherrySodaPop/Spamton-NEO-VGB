@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 var disableSoul:bool = false;
-var disableMovement:bool = true;
-var canShoot:bool = false;
+var disableMovement:bool = false;
+var canShoot:bool = true;
 var zapTimer:float = 0.0;
 var chargeTimer:float = 0.0;
 
@@ -93,7 +93,6 @@ func HandleShooting(delta):
 			chargeTimer = 0.0;
 	else:
 		chargeTimer = 0.0;
-	print(chargeTimer);
 
 func HandleMettatonFight(delta):
 	if (startMettatonFight):
@@ -112,8 +111,6 @@ func _TouchingArea(area:Area2D):
 			if (area.has_meta("damageAmount")):
 				health -= area.get_meta("damageAmount");
 			damaged = true;
-			WAITING_FOR_USER_COUNT += 1
-			WAITING_FOR_USER_TOTAL_COUNT += 1;
 
 func WAIT_FOR_USER():
 	canShoot = true;
@@ -122,10 +119,13 @@ func WAIT_FOR_USER():
 
 func WAITING_FOR_USER(delta):
 	if (WAITING_FOR_USER):
-		if (WAITING_FOR_USER_COUNT == 5):
+		if (WAITING_FOR_USER_COUNT == 5 && WAITING_FOR_USER_TOTAL_COUNT != 15):
 			get_tree().current_scene.get_node("AnimationPlayer").play("intro");
 			WAITING_FOR_USER = false;
 			WAITING_FOR_USER_COUNT = 0;
 		if (!get_tree().current_scene.get_node("AnimationPlayer").is_playing() && WAITING_FOR_USER_TOTAL_COUNT == 15):
 			WAITING_FOR_USER = false;
+			get_tree().current_scene.get_node("spamtonNEO").aimPipis = false;
+			get_tree().current_scene.get_node("AnimationPlayer").seek(0.0);
 			get_tree().current_scene.get_node("AnimationPlayer").play("beginFight");
+			disableSoul = true;

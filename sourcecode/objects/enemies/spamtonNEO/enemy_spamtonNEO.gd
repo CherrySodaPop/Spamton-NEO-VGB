@@ -21,7 +21,7 @@ func _process(delta):
 		$armRJoint.rotation = lerp_angle($armRJoint.rotation,deg2rad(90),0.5);
 		$armRJoint/armR.frame = 1;
 	else:
-		$armRJoint/armR.frame = 0;		
+		$armRJoint/armR.frame = 0;
 	
 	if (animateBody):
 		$headJoint/head.playing = true;

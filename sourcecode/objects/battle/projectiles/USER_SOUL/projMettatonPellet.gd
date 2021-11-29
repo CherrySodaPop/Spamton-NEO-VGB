@@ -12,5 +12,7 @@ func _process(delta):
 
 func _TouchingArea(area:Area2D):
 	if (area.has_meta("projectileType") && area.get_meta("projectileType") == "ENEMY"):
-		if ("hitCount" in area): area.hitCount = true;
+		if ("requiresChargedShot" in area):
+			if (!area.requiresChargedShot): 
+				if ("hitCount" in area): area.hitCount += 1;
 		queue_free();

@@ -3,6 +3,8 @@ extends Node2D
 var TURN_IT_UP_BABY:bool = false;
 var TURN_IT_UP_BABY_AMP:float = 0.0;
 
+var spamtonAttack0 = preload("res://objects/battle/attacks/SpamtonNEO/spamtonNeo_attack0.tscn");
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationPlayer.play("intro")
