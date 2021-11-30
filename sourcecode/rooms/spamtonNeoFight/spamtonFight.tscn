@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/tiles/world.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/overworld/spr_spamtonrails.png" type="Texture" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://assets/materials/spamtonRail.tres" type="Material" id=16]
 [ext_resource path="res://objects/battle/projectiles/SpamtonNEO/projSpamtonHead.tscn" type="PackedScene" id=17]
 [ext_resource path="res://objects/battle/USER_SOUL/USER_SOUL.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/battle/assetBattleUI.tres" type="SpriteFrames" id=19]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -345,18 +346,6 @@ tracks/26/keys = {
 "update": 0,
 "values": [ Vector2( 59, 2 ) ]
 }
-tracks/27/type = "value"
-tracks/27/path = NodePath("StaticBody2D/Line2D:points")
-tracks/27/interp = 1
-tracks/27/loop_wrap = true
-tracks/27/imported = false
-tracks/27/enabled = true
-tracks/27/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ PoolVector2Array(  ) ]
-}
 
 [sub_resource type="Animation" id=3]
 resource_name = "beginFight"
@@ -555,17 +544,19 @@ tracks/15/keys = {
 "update": 0,
 "values": [ Vector2( 158, -100 ) ]
 }
-tracks/16/type = "value"
-tracks/16/path = NodePath("StaticBody2D/Line2D:points")
+tracks/16/type = "method"
+tracks/16/path = NodePath(".")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
 tracks/16/enabled = true
 tracks/16/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 2 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ PoolVector2Array(  ) ]
+"values": [ {
+"args": [  ],
+"method": "PULL_THE_STRINGS"
+} ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -1130,15 +1121,9 @@ position = Vector2( 90, 33 )
 position = Vector2( 59, 2 )
 scale = Vector2( -1, 1 )
 
-[node name="USER_SOUL" parent="." instance=ExtResource( 18 )]
-position = Vector2( -50, -28 )
+[node name="USER_SOUL_BOX" type="StaticBody2D" parent="."]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( 32, 32, 32, -32, -31, -32, -34, -34, 34, -34, 34, 34, -34, 34, -32, -32, -32, 32 )
-
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+[node name="ColorRect" type="ColorRect" parent="USER_SOUL_BOX"]
 margin_left = -32.0
 margin_top = -32.0
 margin_right = 32.0
@@ -1148,7 +1133,46 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Line2D" type="Line2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="USER_SOUL_BOX"]
+polygon = PoolVector2Array( 32, 32, 32, -32, -32, -32, -32, -34, 34, -34, 34, 34, -34, 34, -34, -32, -32, -32, -32, 32 )
+
+[node name="Line2D" type="Line2D" parent="USER_SOUL_BOX"]
+points = PoolVector2Array( -32, -32, -32, 32, 32, 32, 32, -32, -32, -32 )
 width = 1.0
 default_color = Color( 1, 0.729412, 0.666667, 1 )
-begin_cap_mode = 1
+
+[node name="USER_SOUL" parent="." instance=ExtResource( 18 )]
+position = Vector2( -50, -28 )
+
+[node name="BattleHud" type="Node2D" parent="."]
+position = Vector2( -4, 48 )
+
+[node name="ColorRect" type="ColorRect" parent="BattleHud"]
+margin_left = -81.0
+margin_top = -16.0
+margin_right = 89.0
+color = Color( 0.0862745, 0.0901961, 0.137255, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="BattleHud"]
+position = Vector2( -81, -95.5 )
+points = PoolVector2Array( 0, 80, 170, 80 )
+width = 1.0
+default_color = Color( 1, 0.729412, 0.666667, 1 )
+
+[node name="snap" type="AnimatedSprite" parent="BattleHud"]
+position = Vector2( -69, -7 )
+frames = ExtResource( 19 )
+animation = "snap"
+
+[node name="fight" type="AnimatedSprite" parent="BattleHud"]
+position = Vector2( -46, -7 )
+frames = ExtResource( 19 )
+animation = "fight"
+
+[node name="guard" type="AnimatedSprite" parent="BattleHud"]
+position = Vector2( -22, -7 )
+frames = ExtResource( 19 )
+animation = "guard"

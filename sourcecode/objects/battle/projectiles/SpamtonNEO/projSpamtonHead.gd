@@ -16,7 +16,7 @@ func _process(delta):
 	lifeTime += delta;
 	global_transform.origin += moveDir * delta;
 	
-	if (lifeTime > 10.0): queue_free();
+	#if (lifeTime > 10.0): queue_free();
 	
 	if (hitCount >= breakCount):
 		get_tree().current_scene.get_node("USER_SOUL").WAITING_FOR_USER_COUNT += 1
