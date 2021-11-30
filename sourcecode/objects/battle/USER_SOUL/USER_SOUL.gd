@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 var disableSoul:bool = false;
-var disableMovement:bool = false;
-var canShoot:bool = true;
+var disableMovement:bool = true;
+var canShoot:bool = false;
 var zapTimer:float = 0.0;
 var chargeTimer:float = 0.0;
 
@@ -121,6 +121,7 @@ func _TouchingArea(area:Area2D):
 		if (!damaged):
 			if (area.has_meta("damageAmount")):
 				health -= int(area.get_meta("damageAmount") * damageMultiplier);
+			Persistant.get_node("controllerCamera").shakeAmp = 2.0;
 			damaged = true;
 
 func WAIT_FOR_USER():

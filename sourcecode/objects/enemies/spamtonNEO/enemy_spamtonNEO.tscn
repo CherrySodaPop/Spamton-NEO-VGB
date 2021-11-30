@@ -1,91 +1,116 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/characters/spamtonNEO/spamtonNEO.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://objects/enemies/spamtonNEO/enemy_spamtonNEO.gd" type="Script" id=2]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonChainHeart.png" type="Texture" id=3]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonChain0.png" type="Texture" id=4]
 
 [node name="spamtonNEO" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="String1" type="Line2D" parent="."]
+[node name="spriteJoint" type="Node2D" parent="."]
+
+[node name="String1" type="Line2D" parent="spriteJoint"]
 position = Vector2( -3, -5 )
 points = PoolVector2Array( 0, 0, 0, -192 )
 width = 1.0
 default_color = Color( 1, 0.729412, 0.666667, 1 )
 
-[node name="String2" type="Line2D" parent="."]
+[node name="String2" type="Line2D" parent="spriteJoint"]
 position = Vector2( 2, -5 )
 points = PoolVector2Array( 0, 0, 0, -192 )
 width = 1.0
 default_color = Color( 1, 0.729412, 0.666667, 1 )
 
-[node name="String3" type="Line2D" parent="."]
+[node name="String3" type="Line2D" parent="spriteJoint"]
 position = Vector2( 7, -5 )
 points = PoolVector2Array( 0, 0, 0, -192 )
 width = 1.0
 default_color = Color( 1, 0.729412, 0.666667, 1 )
 
-[node name="wingLJoint" type="Node2D" parent="."]
+[node name="wingLJoint" type="Node2D" parent="spriteJoint"]
 position = Vector2( -4, -12 )
 
-[node name="wingL" type="AnimatedSprite" parent="wingLJoint"]
+[node name="wingL" type="AnimatedSprite" parent="spriteJoint/wingLJoint"]
 position = Vector2( -8, -1 )
 frames = ExtResource( 1 )
 animation = "wingL"
 
-[node name="armRJoint" type="Node2D" parent="."]
+[node name="armRJoint" type="Node2D" parent="spriteJoint"]
 position = Vector2( -5, -11 )
 
-[node name="armR" type="AnimatedSprite" parent="armRJoint"]
+[node name="armR" type="AnimatedSprite" parent="spriteJoint/armRJoint"]
 position = Vector2( 0, 10 )
 frames = ExtResource( 1 )
 animation = "arm"
 
-[node name="legRJoint" type="Node2D" parent="."]
+[node name="legRJoint" type="Node2D" parent="spriteJoint"]
 position = Vector2( -1, 2 )
 
-[node name="legR" type="AnimatedSprite" parent="legRJoint"]
+[node name="legR" type="AnimatedSprite" parent="spriteJoint/legRJoint"]
 position = Vector2( 1, 11 )
 frames = ExtResource( 1 )
 animation = "leg"
 
-[node name="legLJoint" type="Node2D" parent="."]
+[node name="legLJoint" type="Node2D" parent="spriteJoint"]
 position = Vector2( 5, 2 )
 
-[node name="legL" type="AnimatedSprite" parent="legLJoint"]
+[node name="legL" type="AnimatedSprite" parent="spriteJoint/legLJoint"]
 position = Vector2( 1, 11 )
 frames = ExtResource( 1 )
 animation = "leg"
 
-[node name="torsoJoint" type="Node2D" parent="."]
+[node name="torsoJoint" type="Node2D" parent="spriteJoint"]
 position = Vector2( 0, -7 )
 
-[node name="torso" type="AnimatedSprite" parent="torsoJoint"]
+[node name="torso" type="AnimatedSprite" parent="spriteJoint/torsoJoint"]
 position = Vector2( 0, 4 )
 frames = ExtResource( 1 )
 animation = "torso"
 
-[node name="headJoint" type="Node2D" parent="."]
+[node name="headJoint" type="Node2D" parent="spriteJoint"]
 position = Vector2( 0, -15 )
 
-[node name="head" type="AnimatedSprite" parent="headJoint"]
+[node name="head" type="AnimatedSprite" parent="spriteJoint/headJoint"]
 position = Vector2( 0, -7 )
 frames = ExtResource( 1 )
 animation = "head"
-frame = 2
 playing = true
 
-[node name="armLJoint" type="Node2D" parent="."]
+[node name="armLJoint" type="Node2D" parent="spriteJoint"]
 position = Vector2( 8, -11 )
 
-[node name="armL" type="AnimatedSprite" parent="armLJoint"]
+[node name="armL" type="AnimatedSprite" parent="spriteJoint/armLJoint"]
 position = Vector2( 0, 10 )
 frames = ExtResource( 1 )
 animation = "arm"
 
-[node name="wingRJoint" type="Node2D" parent="."]
+[node name="wingRJoint" type="Node2D" parent="spriteJoint"]
 position = Vector2( 9, -12 )
 
-[node name="wingR" type="AnimatedSprite" parent="wingRJoint"]
+[node name="wingR" type="AnimatedSprite" parent="spriteJoint/wingRJoint"]
 position = Vector2( 11, 1 )
 frames = ExtResource( 1 )
 animation = "wingR"
+
+[node name="chainedHeart" type="Node2D" parent="spriteJoint"]
+position = Vector2( -4, -7 )
+
+[node name="heart" type="Sprite" parent="spriteJoint/chainedHeart"]
+position = Vector2( -38, -15 )
+texture = ExtResource( 3 )
+
+[node name="chain0" type="Sprite" parent="spriteJoint/chainedHeart"]
+position = Vector2( -26, -11 )
+texture = ExtResource( 4 )
+
+[node name="chain1" type="Sprite" parent="spriteJoint/chainedHeart"]
+position = Vector2( -18, -8 )
+texture = ExtResource( 4 )
+
+[node name="chain2" type="Sprite" parent="spriteJoint/chainedHeart"]
+position = Vector2( -9, -4 )
+texture = ExtResource( 4 )
+
+[node name="chain3" type="Sprite" parent="spriteJoint/chainedHeart"]
+texture = ExtResource( 4 )

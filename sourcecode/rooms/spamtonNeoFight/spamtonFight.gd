@@ -12,6 +12,7 @@ var battleReady:bool = false;
 var battleShowHud:bool = true;
 var battleSelectionHud:int = 0;
 var battleSelectionWaitTime:float = 0.0;
+var battleInputWaitTimeHud:float = 0.0;
 var battleSelectionConfirmed:bool = false;
 var battleEnemyAttacking:bool = false;
 var battleEnemyFiredAttack:bool = false;
@@ -43,21 +44,28 @@ func HandleBattle(delta):
 			$USER_SOUL.global_transform.origin = Vector2.ZERO;
 			$USER_SOUL.EnableBattle();
 			battleSelectionConfirmed = false;
+			battleSelectionWaitTime = 0.0;
 			HandleAttack();
+			battleEnemyAttackCount += 1;
 	
 	HandleBattleVisuals(delta);
 
 func HandleAttack():
-	
-	if (battleEnemyAttackCount == 0):
+	if (true):
 		var tmpScene = spamtonAttack0.instance();
 		get_tree().current_scene.add_child(tmpScene);
 		return;
-	
-	battleEnemyAttackCount += 1;
 
 func HandleBattleHud(delta):
-	if (!battleShowHud): return;
+	if (!battleShowHud):
+		battleInputWaitTimeHud = 0.0;
+		return;
+	
+	battleInputWaitTimeHud += delta;
+	
+	if (battleInputWaitTimeHud < 0.25): return;
+	
+	if (battleSelectionConfirmed): return;
 	
 	if (Input.is_action_just_pressed("moveLeft")):
 		battleSelectionHud -= 1;
@@ -96,6 +104,11 @@ func HandleBattleVisuals(delta):
 	$USER_SOUL_BOX.rotation_degrees = round(SOUL_BOX_ROTATION);
 	$USER_SOUL_BOX.scale.x = clamp($USER_SOUL_BOX.scale.x, 0.0, 1.0);
 	$USER_SOUL_BOX.scale.y = clamp($USER_SOUL_BOX.scale.y, 0.0, 1.0);
+
+func ExitAttack():
+	battleShowHud = true;
+	battleEnemyAttacking = false;
+	$USER_SOUL.DisableBattle();
 
 func RIDE_AROUND_TOWN(delta):
 	if (TURN_IT_UP_BABY):

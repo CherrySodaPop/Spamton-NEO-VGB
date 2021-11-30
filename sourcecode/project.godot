@@ -18,6 +18,11 @@ config/icon="res://icon.png"
 
 Persistant="*res://objects/persistant/persistant.tscn"
 
+[debug]
+
+settings/fps/force_fps=10
+settings/stdout/print_fps=true
+
 [display]
 
 window/size/width=170
