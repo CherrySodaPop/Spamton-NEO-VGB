@@ -8,6 +8,7 @@ var chargeTimer:float = 0.0;
 
 var health:int = 150;
 var damaged:bool = false;
+var damageMultiplier:float = 1.0;
 var invisTimer:float = 0.0;
 var flashTimer:float = 0.0;
 
@@ -33,11 +34,11 @@ func _process(delta):
 		invisTimer += delta;
 		flashTimer += delta;
 	
-	if (flashTimer >= 0.2):
+	if (flashTimer >= 0.1):
 		$spriteJoint.visible = !$spriteJoint.visible;
 		flashTimer = 0.0;
 	
-	if (invisTimer >= 2.0):
+	if (invisTimer >= 1.0):
 		damaged = false;
 		invisTimer = 0.0;
 		$spriteJoint.visible = true;
@@ -94,6 +95,16 @@ func HandleShooting(delta):
 	else:
 		chargeTimer = 0.0;
 
+func EnableBattle():
+	disableSoul = false;
+	disableMovement = false;
+	visible = true;
+
+func DisableBattle():
+	disableSoul = true;
+	disableMovement = true;
+	visible = false;
+
 func HandleMettatonFight(delta):
 	if (startMettatonFight):
 		$spriteJoint.rotation = lerp($spriteJoint.rotation,deg2rad(-90),0.5);
@@ -109,7 +120,7 @@ func _TouchingArea(area:Area2D):
 	if (area && area.has_meta("projectileType") && area.get_meta("projectileType") == "ENEMY"):
 		if (!damaged):
 			if (area.has_meta("damageAmount")):
-				health -= area.get_meta("damageAmount");
+				health -= int(area.get_meta("damageAmount") * damageMultiplier);
 			damaged = true;
 
 func WAIT_FOR_USER():

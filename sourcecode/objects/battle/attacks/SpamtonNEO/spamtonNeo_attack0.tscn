@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/battle/projectiles/SpamtonNEO/projSpamtonHead.tscn" type="PackedScene" id=1]
-[ext_resource path="res://objects/battle/USER_SOUL/USER_SOUL.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/battle/attacks/SpamtonNEO/spamtonNeo_attack0.gd" type="Script" id=3]
 [ext_resource path="res://objects/battle/projectiles/SpamtonNEO/projSpamtonCungadero.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/battle/projectiles/SpamtonNEO/projSpamtonMail.tscn" type="PackedScene" id=5]
@@ -10,8 +9,8 @@
 script = ExtResource( 3 )
 
 [node name="projSpamtonCungadero" parent="." instance=ExtResource( 4 )]
-position = Vector2( 172, 24 )
-moveDir = Vector2( -80, 0 )
+position = Vector2( 172, 35 )
+moveDir = Vector2( -60, 0 )
 
 [node name="projSpamtonMail" parent="projSpamtonCungadero" instance=ExtResource( 5 )]
 position = Vector2( 0, -27 )
@@ -29,8 +28,8 @@ position = Vector2( 0, -63 )
 position = Vector2( -1, -14 )
 
 [node name="projSpamtonCungadero2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 221, 24 )
-moveDir = Vector2( -80, 0 )
+position = Vector2( 221, 35 )
+moveDir = Vector2( -60, 0 )
 
 [node name="projSpamtonMail" parent="projSpamtonCungadero2" instance=ExtResource( 5 )]
 position = Vector2( 0, -37 )
@@ -48,8 +47,8 @@ position = Vector2( 0, -63 )
 position = Vector2( 0, -50 )
 
 [node name="projSpamtonCungadero3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 269, 24 )
-moveDir = Vector2( -80, 0 )
+position = Vector2( 269, 35 )
+moveDir = Vector2( -60, 0 )
 
 [node name="projSpamtonMail" parent="projSpamtonCungadero3" instance=ExtResource( 5 )]
 position = Vector2( 0, -35 )
@@ -64,8 +63,8 @@ position = Vector2( 0, -61 )
 position = Vector2( -1, -17 )
 
 [node name="projSpamtonCungadero4" parent="." instance=ExtResource( 4 )]
-position = Vector2( 314, 24 )
-moveDir = Vector2( -80, 0 )
+position = Vector2( 314, 35 )
+moveDir = Vector2( -60, 0 )
 
 [node name="projSpamtonMail" parent="projSpamtonCungadero4" instance=ExtResource( 5 )]
 position = Vector2( 0, -27 )
@@ -83,8 +82,8 @@ position = Vector2( 0, -63 )
 position = Vector2( -1, -14 )
 
 [node name="projSpamtonCungadero5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 363, 24 )
-moveDir = Vector2( -80, 0 )
+position = Vector2( 363, 35 )
+moveDir = Vector2( -60, 0 )
 
 [node name="projSpamtonMail" parent="projSpamtonCungadero5" instance=ExtResource( 5 )]
 position = Vector2( 0, -37 )
@@ -102,8 +101,8 @@ position = Vector2( 0, -63 )
 position = Vector2( 0, -50 )
 
 [node name="projSpamtonCungadero6" parent="." instance=ExtResource( 4 )]
-position = Vector2( 411, 24 )
-moveDir = Vector2( -80, 0 )
+position = Vector2( 411, 35 )
+moveDir = Vector2( -60, 0 )
 
 [node name="projSpamtonMail" parent="projSpamtonCungadero6" instance=ExtResource( 5 )]
 position = Vector2( 0, -35 )
@@ -116,5 +115,3 @@ position = Vector2( 0, -61 )
 
 [node name="projSpamtonHead5" parent="projSpamtonCungadero6" instance=ExtResource( 1 )]
 position = Vector2( -1, -17 )
-
-[node name="USER_SOUL" parent="." instance=ExtResource( 2 )]

@@ -1122,6 +1122,8 @@ position = Vector2( 59, 2 )
 scale = Vector2( -1, 1 )
 
 [node name="USER_SOUL_BOX" type="StaticBody2D" parent="."]
+position = Vector2( 0, -2 )
+scale = Vector2( 1e-05, 1e-05 )
 
 [node name="ColorRect" type="ColorRect" parent="USER_SOUL_BOX"]
 margin_left = -32.0
@@ -1145,7 +1147,7 @@ default_color = Color( 1, 0.729412, 0.666667, 1 )
 position = Vector2( -50, -28 )
 
 [node name="BattleHud" type="Node2D" parent="."]
-position = Vector2( -4, 48 )
+position = Vector2( -4, 68 )
 
 [node name="ColorRect" type="ColorRect" parent="BattleHud"]
 margin_left = -81.0
@@ -1159,6 +1161,11 @@ __meta__ = {
 [node name="Line2D" type="Line2D" parent="BattleHud"]
 position = Vector2( -81, -95.5 )
 points = PoolVector2Array( 0, 80, 170, 80 )
+width = 1.0
+default_color = Color( 1, 0.729412, 0.666667, 1 )
+
+[node name="Line2D2" type="Line2D" parent="BattleHud"]
+points = PoolVector2Array( 0, -3.5, 17, -3.5, 17, 0.5, 0, 0.5, 0, -3.5 )
 width = 1.0
 default_color = Color( 1, 0.729412, 0.666667, 1 )
 

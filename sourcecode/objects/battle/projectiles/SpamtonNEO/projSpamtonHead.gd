@@ -9,6 +9,7 @@ export (bool) var requiresChargedShot:bool = false;
 
 func _ready():
 	set_meta("projectileType", "ENEMY");
+	set_meta("damageAmount", 20);
 	if (requiresChargedShot): $AnimatedSprite.animation = "megaHead"
 
 func _process(delta):

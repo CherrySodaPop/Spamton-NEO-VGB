@@ -1,5 +1,7 @@
 extends Node2D
 
+var health:int = 4809;
+var wireHealth:int = 100;
 var aimPipis:bool = true;
 var animateBody:bool = true;
 var animateTorso:bool = true;
@@ -39,14 +41,15 @@ func _process(delta):
 			$armRJoint/armR.offset.y = abs(sin(infTimer * 3) * 2);
 			$armLJoint.rotation = (sin(infTimer * 3) * 0.3);
 			if (!aimPipis):
-				$armRJoint.rotation = (sin(infTimer * 4) * 0.3);
+				#$armRJoint.rotation = (sin(infTimer * 4) * 0.3);
+				$armRJoint.rotation = lerp_angle($armRJoint.rotation,(sin(infTimer * 4) * 0.3),0.5);
 		
 		if (animateLegs):
 			$legLJoint.rotation = (sin(infTimer * 3.2) * 0.3);
 			$legRJoint.rotation = (sin(infTimer * 4.2) * 0.3);
 	else:
 		$headJoint/head.playing = false;
-		$headJoint/head.frame = 2;		
+		$headJoint/head.frame = 2;
 
 func ToggleAnimation():
 	animateBody = !animateBody;
