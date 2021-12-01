@@ -9,7 +9,7 @@ var animateWings:bool = true;
 var animateArms:bool = true;
 var animateLegs:bool = true;
 
-var chainedHeart:bool = true;
+var chainedHeart:bool = false;
 var chainedHeartSpringTimer:float = 0.0;
 var chainedHeartBounceDir:int = 0;
 var chainedHeartYOffset:int = 0;
@@ -66,30 +66,38 @@ func _process(delta):
 				chainedHeartSpringTimer = 0.0;
 				chainedHeartBounceDir = 1;
 		if (chainedHeartBounceDir == 1):
-			if (chainedHeartSpringTimer >= 1.5):
+			if (chainedHeartSpringTimer >= 1.1):
 				chainedHeartSpringTimer = 0.0;
 				chainedHeartBounceDir = 0;
 				chainedHeartYOffset = rand_range(-50,50);
 		
 		if (chainedHeartBounceDir == 0):
 			$spriteJoint/headJoint/head.frame = 0;
-			$spriteJoint/armLJoint.rotation = lerp_angle($spriteJoint/armLJoint.rotation, deg2rad(60), 0.2);
-			$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation, deg2rad(60), 0.2);
-			$spriteJoint/legLJoint.rotation = lerp_angle($spriteJoint/legLJoint.rotation, deg2rad(60), 0.2);
-			$spriteJoint/legRJoint.rotation = lerp_angle($spriteJoint/legRJoint.rotation, deg2rad(60), 0.2);
-			$spriteJoint.transform.origin.x += (40 - $spriteJoint.transform.origin.x) * (10 * delta);
+			$spriteJoint/armLJoint.rotation = lerp_angle($spriteJoint/armLJoint.rotation, deg2rad(60), 20 * delta);
+			$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation, deg2rad(60), 20 * delta);
+			$spriteJoint/legLJoint.rotation = lerp_angle($spriteJoint/legLJoint.rotation, deg2rad(60), 20 * delta);
+			$spriteJoint/legRJoint.rotation = lerp_angle($spriteJoint/legRJoint.rotation, deg2rad(60), 20 * delta);
+			$spriteJoint.transform.origin.x += (60 - $spriteJoint.transform.origin.x) * (6 * delta);
 			
-			$spriteJoint/chainedHeart/heart.transform.origin += (Vector2(0,0) - $spriteJoint/chainedHeart/heart.transform.origin) * 0.03;
+			$spriteJoint/chainedHeart/heart.transform.origin = lerp($spriteJoint/chainedHeart/heart.transform.origin, Vector2(0,0), 6 * delta);
+			$spriteJoint/chainedHeart/chain0.transform.origin = lerp($spriteJoint/chainedHeart/chain0.transform.origin, Vector2(0,0), 6 * delta);
+			$spriteJoint/chainedHeart/chain1.transform.origin = lerp($spriteJoint/chainedHeart/chain1.transform.origin, Vector2(0,0), 6 * delta);
+			$spriteJoint/chainedHeart/chain2.transform.origin = lerp($spriteJoint/chainedHeart/chain2.transform.origin, Vector2(0,0), 6 * delta);
+			$spriteJoint/chainedHeart/chain3.transform.origin = lerp($spriteJoint/chainedHeart/chain3.transform.origin, Vector2(0,0), 6 * delta);
 		
 		if (chainedHeartBounceDir == 1):
 			$spriteJoint/headJoint/head.frame = 2;
-			$spriteJoint/armLJoint.rotation = lerp_angle($spriteJoint/armLJoint.rotation, deg2rad(-60), 0.7);
-			$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation, deg2rad(-60), 0.2);
-			$spriteJoint/legLJoint.rotation = lerp_angle($spriteJoint/legLJoint.rotation, deg2rad(-60), 0.2);
-			$spriteJoint/legRJoint.rotation = lerp_angle($spriteJoint/legRJoint.rotation, deg2rad(-60), 0.2);
-			$spriteJoint.transform.origin.x += (0 - $spriteJoint.transform.origin.x) * (10 * delta);
+			$spriteJoint/armLJoint.rotation = lerp_angle($spriteJoint/armLJoint.rotation, deg2rad(-60), 20 * delta);
+			$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation, deg2rad(-60), 20 * delta);
+			$spriteJoint/legLJoint.rotation = lerp_angle($spriteJoint/legLJoint.rotation, deg2rad(-60), 20 * delta);
+			$spriteJoint/legRJoint.rotation = lerp_angle($spriteJoint/legRJoint.rotation, deg2rad(-60), 20 * delta);
+			$spriteJoint.transform.origin.x += (0 - $spriteJoint.transform.origin.x) * (6 * delta);
 			
-			$spriteJoint/chainedHeart/heart.transform.origin += (Vector2(-50,chainedHeartYOffset) - $spriteJoint/chainedHeart/heart.transform.origin) * 0.03;
+			$spriteJoint/chainedHeart/heart.transform.origin = lerp($spriteJoint/chainedHeart/heart.transform.origin, Vector2(-50,chainedHeartYOffset), 6 * delta);
+			$spriteJoint/chainedHeart/chain0.transform.origin = lerp($spriteJoint/chainedHeart/chain0.transform.origin, Vector2(-50,chainedHeartYOffset) * 0.75, 6 * delta);
+			$spriteJoint/chainedHeart/chain1.transform.origin = lerp($spriteJoint/chainedHeart/chain1.transform.origin, Vector2(-50,chainedHeartYOffset) * 0.5, 6 * delta);
+			$spriteJoint/chainedHeart/chain2.transform.origin = lerp($spriteJoint/chainedHeart/chain2.transform.origin, Vector2(-50,chainedHeartYOffset) * 0.25, 6 * delta);
+			$spriteJoint/chainedHeart/chain3.transform.origin = lerp($spriteJoint/chainedHeart/chain3.transform.origin, Vector2(0,0), 6 * delta);
 
 func ToggleAnimation():
 	animateBody = !animateBody;

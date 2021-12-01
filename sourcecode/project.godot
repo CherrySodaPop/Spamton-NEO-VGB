@@ -20,7 +20,6 @@ Persistant="*res://objects/persistant/persistant.tscn"
 
 [debug]
 
-settings/fps/force_fps=10
 settings/stdout/print_fps=true
 
 [display]
@@ -30,6 +29,7 @@ window/size/height=96
 window/size/resizable=false
 window/size/test_width=510
 window/size/test_height=288
+window/vsync/use_vsync=false
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 

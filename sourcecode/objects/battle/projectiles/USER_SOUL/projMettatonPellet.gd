@@ -7,7 +7,7 @@ func _ready():
 
 func _process(delta):
 	lifeTimer += delta;
-	transform.origin.x += 2.0;
+	transform.origin.x += 120.0 * delta;
 	if (lifeTimer >= 6.0): queue_free();
 
 func _TouchingArea(area:Area2D):

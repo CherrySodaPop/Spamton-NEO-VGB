@@ -75,6 +75,7 @@ position = Vector2( 0, -15 )
 position = Vector2( 0, -7 )
 frames = ExtResource( 1 )
 animation = "head"
+frame = 2
 playing = true
 
 [node name="armLJoint" type="Node2D" parent="spriteJoint"]
@@ -94,11 +95,9 @@ frames = ExtResource( 1 )
 animation = "wingR"
 
 [node name="chainedHeart" type="Node2D" parent="spriteJoint"]
+visible = false
 position = Vector2( -4, -7 )
-
-[node name="heart" type="Sprite" parent="spriteJoint/chainedHeart"]
-position = Vector2( -38, -15 )
-texture = ExtResource( 3 )
+z_index = 5
 
 [node name="chain0" type="Sprite" parent="spriteJoint/chainedHeart"]
 position = Vector2( -26, -11 )
@@ -114,3 +113,7 @@ texture = ExtResource( 4 )
 
 [node name="chain3" type="Sprite" parent="spriteJoint/chainedHeart"]
 texture = ExtResource( 4 )
+
+[node name="heart" type="Sprite" parent="spriteJoint/chainedHeart"]
+position = Vector2( -38, -15 )
+texture = ExtResource( 3 )
