@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/battle/attacks/SpamtonNEO/attack1/spamtonNeo_attack1.gd" type="Script" id=1]
+
+[node name="spamtonNeo_attack1" type="Node2D"]
+script = ExtResource( 1 )

@@ -7,7 +7,7 @@ func _ready():
 
 func _process(delta):
 	lifeTimer += delta;
-	if (lifeTimer > 8.0):
+	if (lifeTimer > 9.0):
 		get_tree().current_scene.ExitAttack();
 		queue_free();
 	

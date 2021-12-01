@@ -1124,7 +1124,7 @@ position = Vector2( 59, 2 )
 scale = Vector2( -1, 1 )
 
 [node name="USER_SOUL_BOX" type="StaticBody2D" parent="."]
-position = Vector2( 0, -2 )
+position = Vector2( -44, -2 )
 scale = Vector2( 1e-05, 1e-05 )
 
 [node name="ColorRect" type="ColorRect" parent="USER_SOUL_BOX"]

@@ -18,7 +18,8 @@ var battleEnemyAttacking:bool = false;
 var battleEnemyFiredAttack:bool = false;
 var battleEnemyAttackCount:int = 0;
 
-var spamtonAttack0 = preload("res://objects/battle/attacks/SpamtonNEO/spamtonNeo_attack0.tscn");
+var spamtonAttack0 = preload("res://objects/battle/attacks/SpamtonNEO/attack0/spamtonNeo_attack0.tscn");
+var spamtonAttack1 = preload("res://objects/battle/attacks/SpamtonNEO/attack1/spamtonNeo_attack1.tscn");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,7 +42,7 @@ func HandleBattle(delta):
 			battleEnemyAttacking = true;
 		
 		if (battleSelectionWaitTime >= 1.2):
-			$USER_SOUL.global_transform.origin = Vector2.ZERO;
+			$USER_SOUL.global_transform.origin = Vector2(-44,0);
 			$USER_SOUL.EnableBattle();
 			battleSelectionConfirmed = false;
 			battleSelectionWaitTime = 0.0;
@@ -51,8 +52,12 @@ func HandleBattle(delta):
 	HandleBattleVisuals(delta);
 
 func HandleAttack():
-	if (true):
+	if (battleEnemyAttackCount == 0):
 		var tmpScene = spamtonAttack0.instance();
+		get_tree().current_scene.add_child(tmpScene);
+		return;
+	if (battleEnemyAttackCount == 1):
+		var tmpScene = spamtonAttack1.instance();
 		get_tree().current_scene.add_child(tmpScene);
 		return;
 

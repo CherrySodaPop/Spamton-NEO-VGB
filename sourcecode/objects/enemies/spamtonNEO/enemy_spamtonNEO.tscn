@@ -95,7 +95,6 @@ frames = ExtResource( 1 )
 animation = "wingR"
 
 [node name="chainedHeart" type="Node2D" parent="spriteJoint"]
-visible = false
 position = Vector2( -4, -7 )
 z_index = 5
 

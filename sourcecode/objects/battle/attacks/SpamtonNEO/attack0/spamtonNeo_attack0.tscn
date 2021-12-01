@@ -1,27 +1,27 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/battle/projectiles/SpamtonNEO/projSpamtonHead.tscn" type="PackedScene" id=1]
-[ext_resource path="res://objects/battle/attacks/SpamtonNEO/spamtonNeo_attack0.gd" type="Script" id=3]
+[ext_resource path="res://objects/battle/attacks/SpamtonNEO/attack0/spamtonNeo_attack0.gd" type="Script" id=2]
+[ext_resource path="res://objects/battle/projectiles/SpamtonNEO/projSpamtonMail.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/battle/projectiles/SpamtonNEO/projSpamtonCungadero.tscn" type="PackedScene" id=4]
-[ext_resource path="res://objects/battle/projectiles/SpamtonNEO/projSpamtonMail.tscn" type="PackedScene" id=5]
 
 [node name="spamtonNeo_attack0" type="Node2D"]
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="projSpamtonCungadero" parent="." instance=ExtResource( 4 )]
 position = Vector2( 172, 35 )
 moveDir = Vector2( -60, 0 )
 
-[node name="projSpamtonMail" parent="projSpamtonCungadero" instance=ExtResource( 5 )]
+[node name="projSpamtonMail" parent="projSpamtonCungadero" instance=ExtResource( 3 )]
 position = Vector2( 0, -27 )
 
-[node name="projSpamtonMail2" parent="projSpamtonCungadero" instance=ExtResource( 5 )]
+[node name="projSpamtonMail2" parent="projSpamtonCungadero" instance=ExtResource( 3 )]
 position = Vector2( 0, -39 )
 
-[node name="projSpamtonMail3" parent="projSpamtonCungadero" instance=ExtResource( 5 )]
+[node name="projSpamtonMail3" parent="projSpamtonCungadero" instance=ExtResource( 3 )]
 position = Vector2( 0, -51 )
 
-[node name="projSpamtonMail4" parent="projSpamtonCungadero" instance=ExtResource( 5 )]
+[node name="projSpamtonMail4" parent="projSpamtonCungadero" instance=ExtResource( 3 )]
 position = Vector2( 0, -63 )
 
 [node name="projSpamtonHead5" parent="projSpamtonCungadero" instance=ExtResource( 1 )]
@@ -31,16 +31,16 @@ position = Vector2( -1, -14 )
 position = Vector2( 221, 35 )
 moveDir = Vector2( -60, 0 )
 
-[node name="projSpamtonMail" parent="projSpamtonCungadero2" instance=ExtResource( 5 )]
+[node name="projSpamtonMail" parent="projSpamtonCungadero2" instance=ExtResource( 3 )]
 position = Vector2( 0, -37 )
 
-[node name="projSpamtonMail2" parent="projSpamtonCungadero2" instance=ExtResource( 5 )]
+[node name="projSpamtonMail2" parent="projSpamtonCungadero2" instance=ExtResource( 3 )]
 position = Vector2( 0, -25 )
 
-[node name="projSpamtonMail4" parent="projSpamtonCungadero2" instance=ExtResource( 5 )]
+[node name="projSpamtonMail4" parent="projSpamtonCungadero2" instance=ExtResource( 3 )]
 position = Vector2( 0, -13 )
 
-[node name="projSpamtonMail3" parent="projSpamtonCungadero2" instance=ExtResource( 5 )]
+[node name="projSpamtonMail3" parent="projSpamtonCungadero2" instance=ExtResource( 3 )]
 position = Vector2( 0, -63 )
 
 [node name="projSpamtonHead5" parent="projSpamtonCungadero2" instance=ExtResource( 1 )]
@@ -50,13 +50,13 @@ position = Vector2( 0, -50 )
 position = Vector2( 269, 35 )
 moveDir = Vector2( -60, 0 )
 
-[node name="projSpamtonMail" parent="projSpamtonCungadero3" instance=ExtResource( 5 )]
+[node name="projSpamtonMail" parent="projSpamtonCungadero3" instance=ExtResource( 3 )]
 position = Vector2( 0, -35 )
 
-[node name="projSpamtonMail2" parent="projSpamtonCungadero3" instance=ExtResource( 5 )]
+[node name="projSpamtonMail2" parent="projSpamtonCungadero3" instance=ExtResource( 3 )]
 position = Vector2( 0, -48 )
 
-[node name="projSpamtonMail3" parent="projSpamtonCungadero3" instance=ExtResource( 5 )]
+[node name="projSpamtonMail3" parent="projSpamtonCungadero3" instance=ExtResource( 3 )]
 position = Vector2( 0, -61 )
 
 [node name="projSpamtonHead5" parent="projSpamtonCungadero3" instance=ExtResource( 1 )]
@@ -66,16 +66,16 @@ position = Vector2( -1, -17 )
 position = Vector2( 314, 35 )
 moveDir = Vector2( -60, 0 )
 
-[node name="projSpamtonMail" parent="projSpamtonCungadero4" instance=ExtResource( 5 )]
+[node name="projSpamtonMail" parent="projSpamtonCungadero4" instance=ExtResource( 3 )]
 position = Vector2( 0, -27 )
 
-[node name="projSpamtonMail2" parent="projSpamtonCungadero4" instance=ExtResource( 5 )]
+[node name="projSpamtonMail2" parent="projSpamtonCungadero4" instance=ExtResource( 3 )]
 position = Vector2( 0, -39 )
 
-[node name="projSpamtonMail3" parent="projSpamtonCungadero4" instance=ExtResource( 5 )]
+[node name="projSpamtonMail3" parent="projSpamtonCungadero4" instance=ExtResource( 3 )]
 position = Vector2( 0, -51 )
 
-[node name="projSpamtonMail4" parent="projSpamtonCungadero4" instance=ExtResource( 5 )]
+[node name="projSpamtonMail4" parent="projSpamtonCungadero4" instance=ExtResource( 3 )]
 position = Vector2( 0, -63 )
 
 [node name="projSpamtonHead5" parent="projSpamtonCungadero4" instance=ExtResource( 1 )]
@@ -85,16 +85,16 @@ position = Vector2( -1, -14 )
 position = Vector2( 363, 35 )
 moveDir = Vector2( -60, 0 )
 
-[node name="projSpamtonMail" parent="projSpamtonCungadero5" instance=ExtResource( 5 )]
+[node name="projSpamtonMail" parent="projSpamtonCungadero5" instance=ExtResource( 3 )]
 position = Vector2( 0, -37 )
 
-[node name="projSpamtonMail2" parent="projSpamtonCungadero5" instance=ExtResource( 5 )]
+[node name="projSpamtonMail2" parent="projSpamtonCungadero5" instance=ExtResource( 3 )]
 position = Vector2( 0, -25 )
 
-[node name="projSpamtonMail4" parent="projSpamtonCungadero5" instance=ExtResource( 5 )]
+[node name="projSpamtonMail4" parent="projSpamtonCungadero5" instance=ExtResource( 3 )]
 position = Vector2( 0, -13 )
 
-[node name="projSpamtonMail3" parent="projSpamtonCungadero5" instance=ExtResource( 5 )]
+[node name="projSpamtonMail3" parent="projSpamtonCungadero5" instance=ExtResource( 3 )]
 position = Vector2( 0, -63 )
 
 [node name="projSpamtonHead5" parent="projSpamtonCungadero5" instance=ExtResource( 1 )]
@@ -104,13 +104,13 @@ position = Vector2( 0, -50 )
 position = Vector2( 411, 35 )
 moveDir = Vector2( -60, 0 )
 
-[node name="projSpamtonMail" parent="projSpamtonCungadero6" instance=ExtResource( 5 )]
+[node name="projSpamtonMail" parent="projSpamtonCungadero6" instance=ExtResource( 3 )]
 position = Vector2( 0, -35 )
 
-[node name="projSpamtonMail2" parent="projSpamtonCungadero6" instance=ExtResource( 5 )]
+[node name="projSpamtonMail2" parent="projSpamtonCungadero6" instance=ExtResource( 3 )]
 position = Vector2( 0, -48 )
 
-[node name="projSpamtonMail3" parent="projSpamtonCungadero6" instance=ExtResource( 5 )]
+[node name="projSpamtonMail3" parent="projSpamtonCungadero6" instance=ExtResource( 3 )]
 position = Vector2( 0, -61 )
 
 [node name="projSpamtonHead5" parent="projSpamtonCungadero6" instance=ExtResource( 1 )]

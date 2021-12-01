@@ -20,18 +20,27 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	
 	$spriteJoint/String1.points[0].x = sin(infTimer * 5) * 1.5;
 	$spriteJoint/String2.points[0].x = sin(infTimer * 3) * 1.5;
 	$spriteJoint/String3.points[0].x = sin(infTimer * 2) * 1.5;
 	
 	if (aimPipis):
-		$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation,deg2rad(90),0.5);
+		$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation,deg2rad(90), 20 * delta);
 		$spriteJoint/armRJoint/armR.frame = 1;
 	else:
 		$spriteJoint/armRJoint/armR.frame = 0;
 	
 	if (!chainedHeart):
+		$spriteJoint/chainedHeart.visible = false;
+		$spriteJoint/chainedHeart/heart.transform.origin = Vector2.ZERO;
+		$spriteJoint/chainedHeart/chain0.transform.origin = Vector2.ZERO;
+		$spriteJoint/chainedHeart/chain1.transform.origin = Vector2.ZERO;
+		$spriteJoint/chainedHeart/chain2.transform.origin = Vector2.ZERO;
+		chainedHeartSpringTimer = 0.0;
+		chainedHeartBounceDir = 0;
+		chainedHeartYOffset = 0;
+		$spriteJoint.transform.origin.x += (-$spriteJoint.transform.origin.x) * (6 * delta);
+		
 		if (animateBody):
 			$spriteJoint/headJoint/head.playing = true;
 			infTimer += delta;
@@ -49,7 +58,7 @@ func _process(delta):
 				$spriteJoint/armLJoint.rotation = (sin(infTimer * 3) * 0.3);
 				if (!aimPipis):
 					#$spriteJoint/armRJoint.rotation = (sin(infTimer * 4) * 0.3);
-					$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation,(sin(infTimer * 4) * 0.3),0.5);
+					$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation,(sin(infTimer * 4) * 0.3), 20 * delta);
 			
 			if (animateLegs):
 				$spriteJoint/legLJoint.rotation = (sin(infTimer * 3.2) * 0.3);
@@ -58,6 +67,7 @@ func _process(delta):
 			$spriteJoint/headJoint/head.playing = false;
 			$spriteJoint/headJoint/head.frame = 2;
 	else:
+		$spriteJoint/chainedHeart.visible = true;
 		$spriteJoint/headJoint/head.playing = false;
 		chainedHeartSpringTimer += delta;
 		
@@ -69,7 +79,7 @@ func _process(delta):
 			if (chainedHeartSpringTimer >= 1.1):
 				chainedHeartSpringTimer = 0.0;
 				chainedHeartBounceDir = 0;
-				chainedHeartYOffset = rand_range(-50,50);
+				chainedHeartYOffset = rand_range(-30,30);
 		
 		if (chainedHeartBounceDir == 0):
 			$spriteJoint/headJoint/head.frame = 0;
