@@ -13,3 +13,4 @@ func _process(delta):
 func _TouchingArea(area:Area2D):
 	if (area.has_meta("projectileType") && area.get_meta("projectileType") == "ENEMY"):
 		if ("hitCount" in area): area.hitCount += 1;
+		if ("hit" in area): area.hit = true;

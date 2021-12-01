@@ -15,4 +15,11 @@ func _TouchingArea(area:Area2D):
 		if ("requiresChargedShot" in area):
 			if (!area.requiresChargedShot): 
 				if ("hitCount" in area): area.hitCount += 1;
-		queue_free();
+		else:
+			if ("hitCount" in area): area.hitCount += 1;
+			if ("hit" in area): area.hit = true;
+		if (area.has_meta("blockPellet")):
+			if (area.get_meta("blockPellet") == true):
+				queue_free();
+		else:
+			queue_free();
