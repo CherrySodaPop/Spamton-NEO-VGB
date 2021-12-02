@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bigshot.ogg-de219a69dcd14a192b1fb6cdf2ee4c4c.oggstr"
+
+[deps]
+
+source_file="res://assets/music/bigshot.ogg"
+dest_files=[ "res://.import/bigshot.ogg-de219a69dcd14a192b1fb6cdf2ee4c4c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

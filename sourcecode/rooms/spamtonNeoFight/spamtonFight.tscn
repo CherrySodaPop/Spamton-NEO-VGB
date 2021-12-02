@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/tiles/world.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/overworld/spr_spamtonrails.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://objects/battle/projectiles/SpamtonNEO/projSpamtonHead.tscn" type="PackedScene" id=17]
 [ext_resource path="res://objects/battle/USER_SOUL/USER_SOUL.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/battle/assetBattleUI.tres" type="SpriteFrames" id=19]
+[ext_resource path="res://assets/music/bigshot.ogg" type="AudioStream" id=20]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -947,6 +948,9 @@ stream = ExtResource( 13 )
 [node name="shinkansen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 
+[node name="bigshot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+
 [node name="world" type="Node2D" parent="."]
 
 [node name="BG" type="Node2D" parent="world"]
@@ -1054,14 +1058,12 @@ animation = "walk"
 position = Vector2( -112, 2 )
 frames = ExtResource( 10 )
 animation = "walk"
-frame = 1
 playing = true
 
 [node name="ralsei" type="AnimatedSprite" parent="world"]
 position = Vector2( -101, 21 )
 frames = ExtResource( 9 )
 animation = "walk"
-frame = 1
 playing = true
 
 [node name="intro_minispamtons" type="Node2D" parent="."]

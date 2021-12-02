@@ -117,6 +117,8 @@ func AlphysPhoneCallActivate():
 	startMettatonFight = true;
 
 func _TouchingArea(area:Area2D):
+	if (disableSoul): return;
+	
 	if (area && area.has_meta("projectileType") && area.get_meta("projectileType") == "ENEMY"):
 		if (!damaged):
 			if (area.has_meta("damageAmount")):

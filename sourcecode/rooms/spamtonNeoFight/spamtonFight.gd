@@ -56,7 +56,7 @@ func HandleAttack():
 		var tmpScene = spamtonAttack0.instance();
 		get_tree().current_scene.add_child(tmpScene);
 		return;
-	if (battleEnemyAttackCount == 1):
+	if (battleEnemyAttackCount == 1 || battleEnemyAttackCount != 1):
 		var tmpScene = spamtonAttack1.instance();
 		get_tree().current_scene.add_child(tmpScene);
 		return;
@@ -133,3 +133,4 @@ func SHOW_ON_THE_RAIL():
 
 func PULL_THE_STRINGS():
 	battleReady = !battleReady;
+	$bigshot.playing = true;
