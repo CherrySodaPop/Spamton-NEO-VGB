@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/fonts/themeMaxFont.tres" type="Theme" id=1]
+[ext_resource path="res://rooms/init/VOICE.gd" type="Script" id=2]
+
+[node name="DIALOGUE0" type="Node2D"]
+z_index = 10
+script = ExtResource( 2 )
+WORDS = "STRANGE."
+
+[node name="TALK0" type="RichTextLabel" parent="."]
+margin_right = 531.0
+margin_bottom = 243.0
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "STRANGE."
+text = "STRANGE."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TEXTGLOW" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0.5 )
+
+[node name="TALK1" type="RichTextLabel" parent="TEXTGLOW"]
+margin_left = -1.0
+margin_right = 579.0
+margin_bottom = 282.0
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "STRANGE."
+text = "STRANGE."
+scroll_active = false
+
+[node name="TALK2" type="RichTextLabel" parent="TEXTGLOW"]
+margin_left = 1.0
+margin_right = 581.0
+margin_bottom = 277.0
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "STRANGE."
+text = "STRANGE."
+scroll_active = false
+
+[node name="TALK3" type="RichTextLabel" parent="TEXTGLOW"]
+margin_top = -1.0
+margin_right = 579.0
+margin_bottom = 285.0
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "STRANGE."
+text = "STRANGE."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TALK4" type="RichTextLabel" parent="TEXTGLOW"]
+margin_top = 1.0
+margin_right = 644.0
+margin_bottom = 299.0
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "STRANGE."
+text = "STRANGE."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

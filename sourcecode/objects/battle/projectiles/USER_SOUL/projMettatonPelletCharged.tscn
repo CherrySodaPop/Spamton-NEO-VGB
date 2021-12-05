@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 1.5 )
 
-[node name="projMettatonPellet" type="Area2D"]
+[node name="projMettatonPelletCharged" type="Area2D"]
 scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )
 

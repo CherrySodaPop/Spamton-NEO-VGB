@@ -6,6 +6,7 @@ export (Vector2) var moveDir:Vector2 = Vector2.ZERO;
 
 func _ready():
 	set_meta("projectileType", "ENEMY");
+	set_meta("damageAmount", 30);
 	set_meta("blockPellet", false);
 
 func _process(delta):

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/soulMettatonFire.ogg-e114f5d882a3d96d7e9ea087aa8d68da.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/soulMettatonFire.ogg"
+dest_files=[ "res://.import/soulMettatonFire.ogg-e114f5d882a3d96d7e9ea087aa8d68da.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

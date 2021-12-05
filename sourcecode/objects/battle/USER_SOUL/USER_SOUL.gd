@@ -7,6 +7,7 @@ var zapTimer:float = 0.0;
 var chargeTimer:float = 0.0;
 
 var health:int = 150;
+var healthMax:int = 150;
 var damaged:bool = false;
 var damageMultiplier:float = 1.0;
 var invisTimer:float = 0.0;
@@ -31,6 +32,7 @@ func _ready():
 func _process(delta):
 	
 	if (damaged):
+		if (invisTimer == 0.0): $soulHurt.playing = true;
 		invisTimer += delta;
 		flashTimer += delta;
 	
@@ -83,6 +85,7 @@ func HandleShooting(delta):
 				var tmpObj = projMettaton.instance();
 				get_tree().root.add_child(tmpObj);
 				tmpObj.global_transform.origin = global_transform.origin + Vector2(4,0);
+				tmpObj.z_index = z_index;
 				zapTimer = 0.0;
 			
 			# charged shot
@@ -90,6 +93,7 @@ func HandleShooting(delta):
 				var tmpObj = projMettatonCharged.instance();
 				get_tree().root.add_child(tmpObj);
 				tmpObj.global_transform.origin = global_transform.origin + Vector2(4,0);
+				tmpObj.z_index = z_index;
 			
 			chargeTimer = 0.0;
 	else:
@@ -140,6 +144,7 @@ func WAITING_FOR_USER(delta):
 		if (!get_tree().current_scene.get_node("AnimationPlayer").is_playing() && WAITING_FOR_USER_TOTAL_COUNT == 15):
 			WAITING_FOR_USER = false;
 			get_tree().current_scene.get_node("spamtonNEO").aimPipis = false;
+			get_tree().current_scene.get_node("spamtonLaugh").playing = true;
 			get_tree().current_scene.get_node("AnimationPlayer").seek(0.0);
 			get_tree().current_scene.get_node("AnimationPlayer").play("beginFight");
 			disableSoul = true;

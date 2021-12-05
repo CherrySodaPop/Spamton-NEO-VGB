@@ -20,6 +20,9 @@ var battleEnemyAttackCount:int = 0;
 
 var spamtonAttack0 = preload("res://objects/battle/attacks/SpamtonNEO/attack0/spamtonNeo_attack0.tscn");
 var spamtonAttack1 = preload("res://objects/battle/attacks/SpamtonNEO/attack1/spamtonNeo_attack1.tscn");
+var spamtonAttack2 = preload("res://objects/battle/attacks/SpamtonNEO/attack2/spamtonNeo_attack2.tscn");
+var spamtonAttack3 = preload("res://objects/battle/attacks/SpamtonNEO/attack3/spamtonNeo_attack3.tscn");
+var spamtonAttack4 = preload("res://objects/battle/attacks/SpamtonNEO/attack4/spamtonNeo_attack4.tscn");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -38,6 +41,7 @@ func HandleBattle(delta):
 		battleSelectionWaitTime += delta;
 		
 		if (battleSelectionWaitTime >= 1.0):
+			if (!battleEnemyAttacking): HandleAttack();
 			battleShowHud = false;
 			battleEnemyAttacking = true;
 		
@@ -46,7 +50,6 @@ func HandleBattle(delta):
 			$USER_SOUL.EnableBattle();
 			battleSelectionConfirmed = false;
 			battleSelectionWaitTime = 0.0;
-			HandleAttack();
 			battleEnemyAttackCount += 1;
 	
 	HandleBattleVisuals(delta);
@@ -56,8 +59,20 @@ func HandleAttack():
 		var tmpScene = spamtonAttack0.instance();
 		get_tree().current_scene.add_child(tmpScene);
 		return;
-	if (battleEnemyAttackCount == 1 || battleEnemyAttackCount != 1):
+	if (battleEnemyAttackCount == 1):
 		var tmpScene = spamtonAttack1.instance();
+		get_tree().current_scene.add_child(tmpScene);
+		return;
+	if (battleEnemyAttackCount == 2):
+		var tmpScene = spamtonAttack2.instance();
+		get_tree().current_scene.add_child(tmpScene);
+		return;
+	if (battleEnemyAttackCount == 3):
+		var tmpScene = spamtonAttack3.instance();
+		get_tree().current_scene.add_child(tmpScene);
+		return;
+	if (battleEnemyAttackCount == 4 || battleEnemyAttackCount != 4):
+		var tmpScene = spamtonAttack4.instance();
 		get_tree().current_scene.add_child(tmpScene);
 		return;
 
@@ -68,7 +83,7 @@ func HandleBattleHud(delta):
 	
 	battleInputWaitTimeHud += delta;
 	
-	if (battleInputWaitTimeHud < 0.25): return;
+	if (battleInputWaitTimeHud < 0.75): return;
 	
 	if (battleSelectionConfirmed): return;
 	
@@ -95,6 +110,8 @@ func HandleBattleVisuals(delta):
 	else:
 		$BattleHud.global_transform.origin.y += (68 - $BattleHud.global_transform.origin.y) * (15 * delta);
 	
+	$HealthHud/Line2D.points[1].x = -81 + (float($USER_SOUL.health) / float($USER_SOUL.healthMax)) * 54;
+	
 	$BattleHud/snap.frame = (battleShowHud && battleSelectionHud == 0);
 	$BattleHud/fight.frame = (battleShowHud && battleSelectionHud == 1);
 	$BattleHud/guard.frame = (battleShowHud && battleSelectionHud == 2);
@@ -106,6 +123,15 @@ func HandleBattleVisuals(delta):
 	else:
 		SOUL_BOX_ROTATION = rad2deg(lerp_angle(deg2rad(SOUL_BOX_ROTATION),PI, 8 * delta));
 		$USER_SOUL_BOX.scale = $USER_SOUL_BOX.scale - (Vector2(2,2) * delta);
+		
+		if ($USER_SOUL_BOX.scale.x < 0.1):
+			$USER_SOUL_BOX/Normal.visible = true;
+			$USER_SOUL_BOX/Normal/CollisionShape2D.disabled = false;
+			$USER_SOUL_BOX/Wide.visible = false;
+			$USER_SOUL_BOX/Wide/CollisionShape2D.disabled = true;
+		
+		$world/OverlayBright.modulate.a = $world/OverlayBright.modulate.a - (delta * 2.0);
+		
 	$USER_SOUL_BOX.rotation_degrees = round(SOUL_BOX_ROTATION);
 	$USER_SOUL_BOX.scale.x = clamp($USER_SOUL_BOX.scale.x, 0.0, 1.0);
 	$USER_SOUL_BOX.scale.y = clamp($USER_SOUL_BOX.scale.y, 0.0, 1.0);

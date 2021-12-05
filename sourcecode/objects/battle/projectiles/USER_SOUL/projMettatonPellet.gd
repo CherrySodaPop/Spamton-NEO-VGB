@@ -1,9 +1,12 @@
 extends Area2D
 
 var lifeTimer:float = 0.0;
+var sndPew = preload("res://objects/sounds/sndSoulMettatonFire.tscn");
 
 func _ready():
 	connect("area_entered",self,"_TouchingArea");
+	var tmpObj = sndPew.instance();
+	get_tree().current_scene.add_child(tmpObj);
 
 func _process(delta):
 	lifeTimer += delta;

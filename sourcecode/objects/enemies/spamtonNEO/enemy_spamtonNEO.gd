@@ -9,6 +9,10 @@ var animateWings:bool = true;
 var animateArms:bool = true;
 var animateLegs:bool = true;
 
+var ringring:bool = false;
+var ringringTimer:float = 0.0;
+var ringringPickUpThePhone:bool = false;
+
 var chainedHeart:bool = false;
 var chainedHeartSpringTimer:float = 0.0;
 var chainedHeartBounceDir:int = 0;
@@ -24,7 +28,58 @@ func _process(delta):
 	$spriteJoint/String2.points[0].x = sin(infTimer * 3) * 1.5;
 	$spriteJoint/String3.points[0].x = sin(infTimer * 2) * 1.5;
 	
-	if (aimPipis):
+	if (ringring):
+		ringringTimer += delta
+		$ringring/phone.offset.y = -abs(sin(ringringTimer * 3.0) * 5.0);
+		$ringring/phone.transform.origin.y = lerp($ringring/phone.transform.origin.y, -10, 8 * delta);
+		$ringring/Line2D.points[1].y = $ringring/phone.transform.origin.y;
+		
+		if (round($ringring/phone.transform.origin.y) == -10.0):
+			ringringPickUpThePhone = true;
+		
+		if (ringringPickUpThePhone && ringringTimer < 4.0):
+			$ringring/phone.transform.origin.y = -26;
+			$ringring/phone.visible = false;
+			$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation, deg2rad(145), 20 * delta);
+			$spriteJoint/headJoint/head.frame = 0;
+			$spriteJoint/armRJoint/areyouserious.visible = true;
+			$ringring/WHAT.visible = true;
+			$ringring/ITSFORYOU.visible = false;
+			$ringring/WHAT.offset.y = sin(ringringTimer*5.0) * 2.0;
+		
+		if (ringringPickUpThePhone && ringringTimer >= 4.0):
+			$ringring/Line2D.points[0].x = lerp($ringring/Line2D.points[0].x,-22, 20 * delta);
+			$ringring/Line2D.points[1].x = lerp($ringring/Line2D.points[1].x,-22, 20 * delta);
+			$ringring/phone.transform.origin.y = -26;
+			$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation, deg2rad(90), 20 * delta);
+			$spriteJoint/headJoint/head.frame = 1;
+			$spriteJoint/armRJoint/areyouserious.visible = false;
+			$spriteJoint/armRJoint/ITSFORYOU.visible = true;
+			
+			$ringring/WHAT.visible = false;
+			$ringring/ITSFORYOU.visible = true;
+			$ringring/ITSFORYOU.offset = Vector2(rand_range(-2.0,2.0),rand_range(-2.0,2.0));
+		
+		if (ringringPickUpThePhone && ringringTimer >= 5.0):
+			$spriteJoint.transform.origin.x = lerp($spriteJoint.transform.origin.x, 120, 4 * delta);
+			$ringring/ITSFORYOU.visible = false;
+			$ringring/phone.transform.origin.y = -70;
+			
+		
+	else:
+		ringringTimer = 0.0;
+		ringringPickUpThePhone = false;
+		$ringring/phone.transform.origin.y = -70;
+		$ringring/Line2D.points[1].y = -70;
+		$ringring/Line2D.points[0].x = -17;
+		$ringring/Line2D.points[1].x = -17;
+		$spriteJoint/armRJoint/areyouserious.visible = false;
+		$spriteJoint/armRJoint/ITSFORYOU.visible = false;
+		$ringring/phone.visible = true;
+		$ringring/WHAT.visible = false;
+		$ringring/ITSFORYOU.visible = false;
+	
+	if (aimPipis && !ringringPickUpThePhone):
 		$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation,deg2rad(90), 20 * delta);
 		$spriteJoint/armRJoint/armR.frame = 1;
 	else:
@@ -39,7 +94,7 @@ func _process(delta):
 		chainedHeartSpringTimer = 0.0;
 		chainedHeartBounceDir = 0;
 		chainedHeartYOffset = 0;
-		$spriteJoint.transform.origin.x += (-$spriteJoint.transform.origin.x) * (6 * delta);
+		if (!ringring): $spriteJoint.transform.origin.x += (-$spriteJoint.transform.origin.x) * (6 * delta);
 		
 		if (animateBody):
 			$spriteJoint/headJoint/head.playing = true;
@@ -56,7 +111,7 @@ func _process(delta):
 				$spriteJoint/armLJoint/armL.offset.y = abs(sin(infTimer * 2) * 2);
 				$spriteJoint/armRJoint/armR.offset.y = abs(sin(infTimer * 3) * 2);
 				$spriteJoint/armLJoint.rotation = (sin(infTimer * 3) * 0.3);
-				if (!aimPipis):
+				if (!aimPipis && !ringringPickUpThePhone):
 					#$spriteJoint/armRJoint.rotation = (sin(infTimer * 4) * 0.3);
 					$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation,(sin(infTimer * 4) * 0.3), 20 * delta);
 			

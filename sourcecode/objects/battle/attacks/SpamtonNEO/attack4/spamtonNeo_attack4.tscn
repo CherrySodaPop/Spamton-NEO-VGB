@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://objects/battle/attacks/SpamtonNEO/attack4/spamtonNeo_attack4.gd" type="Script" id=1]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_bigshotFull.png" type="Texture" id=2]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_bigshotHeadBottom.png" type="Texture" id=3]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_bigshotHeadTop.png" type="Texture" id=4]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_bigshotBody.png" type="Texture" id=5]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_bigShotHead.png" type="Texture" id=6]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_bigshotYumKromer.png" type="Texture" id=7]
+[ext_resource path="res://objects/battle/attacks/SpamtonNEO/attack4/spamtonHead.gd" type="Script" id=8]
+[ext_resource path="res://assets/sounds/explosion.ogg" type="AudioStream" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13.5, 72.5 )
+
+[node name="spamtonNeo_attack4" type="Node2D"]
+z_index = 1
+script = ExtResource( 1 )
+
+[node name="USER_SOUL_BOX" type="Node2D" parent="."]
+position = Vector2( -44, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="USER_SOUL_BOX"]
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.0823529, 0.121569, 0.0196078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="USER_SOUL_BOX"]
+points = PoolVector2Array( -32, -32, -32, 32, 32, 32, 32, -32, -32, -32 )
+width = 1.0
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
+
+[node name="BIGSHOT" type="Node2D" parent="."]
+position = Vector2( 139, 8 )
+z_index = 2
+
+[node name="loom" type="Sprite" parent="BIGSHOT"]
+texture = ExtResource( 2 )
+
+[node name="normal" type="Sprite" parent="BIGSHOT"]
+texture = ExtResource( 5 )
+
+[node name="head" type="Node2D" parent="BIGSHOT"]
+
+[node name="default" type="Sprite" parent="BIGSHOT/head"]
+position = Vector2( -19, -19 )
+texture = ExtResource( 6 )
+
+[node name="wreck" type="Sprite" parent="BIGSHOT/head"]
+visible = false
+position = Vector2( -19, -19 )
+texture = ExtResource( 7 )
+
+[node name="headSpew" type="Node2D" parent="BIGSHOT"]
+visible = false
+
+[node name="top" type="Sprite" parent="BIGSHOT/headSpew"]
+position = Vector2( -19, 0 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, -29 )
+
+[node name="bottom" type="Sprite" parent="BIGSHOT/headSpew"]
+position = Vector2( -19, 0 )
+texture = ExtResource( 3 )
+offset = Vector2( 0, 1 )
+
+[node name="HitBox" type="Area2D" parent="BIGSHOT"]
+position = Vector2( -21, -15 )
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BIGSHOT/HitBox"]
+position = Vector2( 0, -0.5 )
+shape = SubResource( 1 )
+
+[node name="explosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = 9.455

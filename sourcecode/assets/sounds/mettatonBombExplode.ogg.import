@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mettatonBombExplode.ogg-951fe4e18f2b131a8c0b1fb3e02bfd70.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/mettatonBombExplode.ogg"
+dest_files=[ "res://.import/mettatonBombExplode.ogg-951fe4e18f2b131a8c0b1fb3e02bfd70.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

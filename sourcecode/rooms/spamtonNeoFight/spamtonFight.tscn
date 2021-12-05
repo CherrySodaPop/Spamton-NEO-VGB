@@ -962,7 +962,7 @@ margin_left = -1388.0
 margin_top = -1144.0
 margin_right = 1351.0
 margin_bottom = 1097.0
-color = Color( 0.0862745, 0.0901961, 0.137255, 1 )
+color = Color( 0.0823529, 0.121569, 0.0196078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1028,7 +1028,22 @@ margin_left = -1388.0
 margin_top = -1144.0
 margin_right = 1351.0
 margin_bottom = 1097.0
-color = Color( 0.0862745, 0.0901961, 0.137255, 1 )
+color = Color( 0.0823529, 0.121569, 0.0196078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OverlayBright" type="Node2D" parent="world"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -139, 0 )
+z_index = 4096
+
+[node name="ColorRect" type="ColorRect" parent="world/OverlayBright"]
+margin_left = -1388.0
+margin_top = -1144.0
+margin_right = 1351.0
+margin_bottom = 1097.0
+color = Color( 0.67451, 0.882353, 0.329412, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1141,7 +1156,7 @@ margin_left = -32.0
 margin_top = -32.0
 margin_right = 32.0
 margin_bottom = 32.0
-color = Color( 0.0823529, 0.0823529, 0.129412, 1 )
+color = Color( 0.0823529, 0.121569, 0.0196078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1149,10 +1164,9 @@ __meta__ = {
 [node name="Line2D" type="Line2D" parent="USER_SOUL_BOX/Normal"]
 points = PoolVector2Array( -32, -32, -32, 32, 32, 32, 32, -32, -32, -32 )
 width = 1.0
-default_color = Color( 1, 0.729412, 0.666667, 1 )
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
 
 [node name="Wide" type="StaticBody2D" parent="USER_SOUL_BOX"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="USER_SOUL_BOX/Wide"]
 polygon = PoolVector2Array( 44, 18, 44, -14, -32, -14, -32, -16, 46, -16, 46, 20, -34, 20, -34, -14, -32, -14, -32, 18 )
@@ -1163,7 +1177,7 @@ margin_left = -32.0
 margin_top = -14.0
 margin_right = 44.0
 margin_bottom = 18.0
-color = Color( 0.0823529, 0.0823529, 0.129412, 1 )
+color = Color( 0.0823529, 0.121569, 0.0196078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1171,7 +1185,7 @@ __meta__ = {
 [node name="Line2D" type="Line2D" parent="USER_SOUL_BOX/Wide"]
 points = PoolVector2Array( -32, -14, -32, 18, 44, 18, 44, -14, -32, -14 )
 width = 1.0
-default_color = Color( 1, 0.729412, 0.666667, 1 )
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
 
 [node name="USER_SOUL" parent="." instance=ExtResource( 18 )]
 position = Vector2( -50, -28 )
@@ -1183,7 +1197,7 @@ position = Vector2( -4, 68 )
 margin_left = -81.0
 margin_top = -16.0
 margin_right = 89.0
-color = Color( 0.0862745, 0.0901961, 0.137255, 1 )
+color = Color( 0.0823529, 0.121569, 0.0196078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1192,12 +1206,12 @@ __meta__ = {
 position = Vector2( -81, -95.5 )
 points = PoolVector2Array( 0, 80, 170, 80 )
 width = 1.0
-default_color = Color( 1, 0.729412, 0.666667, 1 )
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
 
 [node name="Line2D2" type="Line2D" parent="BattleHud"]
 points = PoolVector2Array( 0, -3.5, 17, -3.5, 17, 0.5, 0, 0.5, 0, -3.5 )
 width = 1.0
-default_color = Color( 1, 0.729412, 0.666667, 1 )
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
 
 [node name="snap" type="AnimatedSprite" parent="BattleHud"]
 position = Vector2( -69, -7 )
@@ -1213,3 +1227,30 @@ animation = "fight"
 position = Vector2( -22, -7 )
 frames = ExtResource( 19 )
 animation = "guard"
+
+[node name="HealthHud" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="HealthHud"]
+margin_left = -83.0
+margin_top = -46.0
+margin_right = -25.0
+margin_bottom = -41.0
+color = Color( 0.67451, 0.882353, 0.329412, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="HealthHud"]
+margin_left = -82.0
+margin_top = -45.0
+margin_right = -26.0
+margin_bottom = -42.0
+color = Color( 0.0823529, 0.121569, 0.0196078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="HealthHud"]
+points = PoolVector2Array( -81, -44, -27, -44 )
+width = 1.0
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )

@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/characters/spamtonNEO/spamtonNEO.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://objects/enemies/spamtonNEO/enemy_spamtonNEO.gd" type="Script" id=2]
 [ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonChainHeart.png" type="Texture" id=3]
 [ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonChain0.png" type="Texture" id=4]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonMAKETHEMRING.png" type="Texture" id=5]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonAREYOUSERIOUS.png" type="Texture" id=6]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonWHAT.png" type="Texture" id=7]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonITSFORYOU.png" type="Texture" id=8]
 
 [node name="spamtonNEO" type="Node2D"]
 script = ExtResource( 2 )
@@ -14,19 +18,19 @@ script = ExtResource( 2 )
 position = Vector2( -3, -5 )
 points = PoolVector2Array( 0, 0, 0, -192 )
 width = 1.0
-default_color = Color( 1, 0.729412, 0.666667, 1 )
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
 
 [node name="String2" type="Line2D" parent="spriteJoint"]
 position = Vector2( 2, -5 )
 points = PoolVector2Array( 0, 0, 0, -192 )
 width = 1.0
-default_color = Color( 1, 0.729412, 0.666667, 1 )
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
 
 [node name="String3" type="Line2D" parent="spriteJoint"]
 position = Vector2( 7, -5 )
 points = PoolVector2Array( 0, 0, 0, -192 )
 width = 1.0
-default_color = Color( 1, 0.729412, 0.666667, 1 )
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
 
 [node name="wingLJoint" type="Node2D" parent="spriteJoint"]
 position = Vector2( -4, -12 )
@@ -43,6 +47,18 @@ position = Vector2( -5, -11 )
 position = Vector2( 0, 10 )
 frames = ExtResource( 1 )
 animation = "arm"
+
+[node name="areyouserious" type="Sprite" parent="spriteJoint/armRJoint"]
+visible = false
+position = Vector2( -1, 17 )
+rotation = -1.5708
+texture = ExtResource( 5 )
+
+[node name="ITSFORYOU" type="Sprite" parent="spriteJoint/armRJoint"]
+visible = false
+position = Vector2( -3, 20 )
+rotation = 1.5708
+texture = ExtResource( 6 )
 
 [node name="legRJoint" type="Node2D" parent="spriteJoint"]
 position = Vector2( -1, 2 )
@@ -75,7 +91,6 @@ position = Vector2( 0, -15 )
 position = Vector2( 0, -7 )
 frames = ExtResource( 1 )
 animation = "head"
-frame = 1
 playing = true
 
 [node name="armLJoint" type="Node2D" parent="spriteJoint"]
@@ -116,3 +131,26 @@ texture = ExtResource( 4 )
 [node name="heart" type="Sprite" parent="spriteJoint/chainedHeart"]
 position = Vector2( -38, -15 )
 texture = ExtResource( 3 )
+
+[node name="ringring" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="ringring"]
+position = Vector2( -5, 0 )
+points = PoolVector2Array( -17, -134, -17, -70 )
+width = 1.0
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
+
+[node name="phone" type="AnimatedSprite" parent="ringring"]
+position = Vector2( -21, -70 )
+frames = ExtResource( 1 )
+animation = "phone"
+frame = 1
+playing = true
+
+[node name="WHAT" type="Sprite" parent="ringring"]
+position = Vector2( 15, -41 )
+texture = ExtResource( 7 )
+
+[node name="ITSFORYOU" type="Sprite" parent="ringring"]
+position = Vector2( -20, -36 )
+texture = ExtResource( 8 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SOUL_APPEAR.ogg-40f5fb8246bd24d8d0ad2015e2c72702.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/SOUL_APPEAR.ogg"
+dest_files=[ "res://.import/SOUL_APPEAR.ogg-40f5fb8246bd24d8d0ad2015e2c72702.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

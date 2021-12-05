@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/spamtonBigShot.ogg-f85dde6971b3f03e0587967e95036f3b.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/spamtonBigShot.ogg"
+dest_files=[ "res://.import/spamtonBigShot.ogg-f85dde6971b3f03e0587967e95036f3b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

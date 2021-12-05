@@ -18,6 +18,7 @@ func _process(delta):
 	
 	if ($chainedHeartHitbox.hitCount >= 30):
 		get_tree().current_scene.get_node("spamtonNEO").chainedHeart = false;
+		get_tree().current_scene.get_node("spamtonNEO/spriteJoint/chainedHeart/heart").visible = true;
 		get_tree().current_scene.ExitAttack();
 		queue_free();
 	
