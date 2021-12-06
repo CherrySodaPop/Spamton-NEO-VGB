@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://objects/battle/attacks/SpamtonNEO/attack5/spamtonNeo_attack5.gd" type="Script" id=1]
+[ext_resource path="res://assets/characters/spamtonNEO/spamtonNEO.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonNose0.png" type="Texture" id=3]
+[ext_resource path="res://objects/battle/attacks/SpamtonNEO/attack5/HeadParts.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 11.5, 3 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 6, 7.5 )
+
+[node name="spamtonNeo_attack5" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="spamtonBox" type="Node2D" parent="."]
+position = Vector2( 117, -2 )
+
+[node name="BG" type="Node2D" parent="spamtonBox"]
+
+[node name="ColorRect" type="ColorRect" parent="spamtonBox/BG"]
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.0823529, 0.121569, 0.0196078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="spamtonBox/BG"]
+points = PoolVector2Array( -32, -32, -32, 32, 32, 32, 32, -32, -32, -32 )
+width = 1.0
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
+
+[node name="Head" type="Node2D" parent="spamtonBox"]
+
+[node name="Top" type="AnimatedSprite" parent="spamtonBox/Head"]
+position = Vector2( 22, -17 )
+frames = ExtResource( 2 )
+animation = "topHead"
+
+[node name="Bottom" type="AnimatedSprite" parent="spamtonBox/Head"]
+position = Vector2( 13, 13 )
+frames = ExtResource( 2 )
+animation = "bottomHead"
+
+[node name="Nose" type="Sprite" parent="spamtonBox/Head"]
+position = Vector2( 4, 0 )
+texture = ExtResource( 3 )
+
+[node name="Mouth" type="Area2D" parent="spamtonBox"]
+position = Vector2( 22, 14 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spamtonBox/Mouth"]
+position = Vector2( -5, 0 )
+shape = SubResource( 1 )
+
+[node name="Nose" type="Area2D" parent="spamtonBox"]
+position = Vector2( 10, 0 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spamtonBox/Nose"]
+position = Vector2( -5.5, 1 )
+shape = SubResource( 2 )
+
+[node name="Eyes" type="Area2D" parent="spamtonBox"]
+position = Vector2( 19, -11 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spamtonBox/Eyes"]
+position = Vector2( 0, -0.5 )
+shape = SubResource( 3 )

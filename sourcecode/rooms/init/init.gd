@@ -20,7 +20,7 @@ func _ready():
 func _process(delta):
 	HESITATE += delta;
 	
-	if (Input.is_action_just_pressed("confirm")):
+	if (ALLOW_CHOICE != 2 && Input.is_action_just_pressed("confirm")):
 		IMPATIENT += 1;
 		IMPATIENTDELAY = 0.0;
 	

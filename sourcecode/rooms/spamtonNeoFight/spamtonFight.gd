@@ -23,6 +23,7 @@ var spamtonAttack1 = preload("res://objects/battle/attacks/SpamtonNEO/attack1/sp
 var spamtonAttack2 = preload("res://objects/battle/attacks/SpamtonNEO/attack2/spamtonNeo_attack2.tscn");
 var spamtonAttack3 = preload("res://objects/battle/attacks/SpamtonNEO/attack3/spamtonNeo_attack3.tscn");
 var spamtonAttack4 = preload("res://objects/battle/attacks/SpamtonNEO/attack4/spamtonNeo_attack4.tscn");
+var spamtonAttack5 = preload("res://objects/battle/attacks/SpamtonNEO/attack5/spamtonNeo_attack5.tscn");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -68,10 +69,14 @@ func HandleAttack():
 		get_tree().current_scene.add_child(tmpScene);
 		return;
 	if (battleEnemyAttackCount == 3):
+		var tmpScene = spamtonAttack5.instance();
+		get_tree().current_scene.add_child(tmpScene);
+		return;
+	if (battleEnemyAttackCount == 4):
 		var tmpScene = spamtonAttack3.instance();
 		get_tree().current_scene.add_child(tmpScene);
 		return;
-	if (battleEnemyAttackCount == 4 || battleEnemyAttackCount != 4):
+	if (battleEnemyAttackCount == 5 || battleEnemyAttackCount != 5):
 		var tmpScene = spamtonAttack4.instance();
 		get_tree().current_scene.add_child(tmpScene);
 		return;
