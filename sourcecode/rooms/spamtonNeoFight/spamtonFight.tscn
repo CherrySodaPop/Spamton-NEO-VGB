@@ -1073,12 +1073,14 @@ animation = "walk"
 position = Vector2( -112, 2 )
 frames = ExtResource( 10 )
 animation = "walk"
+frame = 1
 playing = true
 
 [node name="ralsei" type="AnimatedSprite" parent="world"]
 position = Vector2( -101, 21 )
 frames = ExtResource( 9 )
 animation = "walk"
+frame = 1
 playing = true
 
 [node name="intro_minispamtons" type="Node2D" parent="."]

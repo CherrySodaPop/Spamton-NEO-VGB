@@ -2,12 +2,16 @@ extends Node2D
 
 var health:int = 4809;
 var wireHealth:int = 100;
-var aimPipis:bool = false;
+var aimPipis:bool = true;
+var aimPipisFire:bool = false;
+var aimPipisFireTimer:float = 0.0;
+var aimPipisState:bool = false;
 var animateBody:bool = true;
 var animateTorso:bool = true;
 var animateWings:bool = true;
 var animateArms:bool = true;
 var animateLegs:bool = true;
+var rotationAmp:float = 1.0;
 
 var ringring:bool = false;
 var ringringTimer:float = 0.0;
@@ -80,9 +84,24 @@ func _process(delta):
 		$ringring/ITSFORYOU.visible = false;
 	
 	if (aimPipis && !ringringPickUpThePhone):
-		$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation,deg2rad(90), 20 * delta);
+		rotationAmp = 2.5;
+		if (aimPipisFire):
+			aimPipisFireTimer += delta;
+			if (aimPipisFireTimer >= 0.9):
+				if (aimPipisState):
+					$spriteJoint/armRJoint.rotation_degrees = -91;
+				else:
+					$spriteJoint/armRJoint.rotation_degrees = -89;
+				aimPipisState = !aimPipisState;
+				aimPipisFireTimer = 0.0;
+			$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation, deg2rad(90), 5 * delta);
+		else:
+			aimPipisFireTimer = 0.0;
+			$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation,deg2rad(90), 20 * delta);
 		$spriteJoint/armRJoint/armR.frame = 1;
+		$spriteJoint/headJoint/head.frame = 2;
 	else:
+		rotationAmp = 1.0;
 		$spriteJoint/armRJoint/armR.frame = 0;
 	
 	if (!chainedHeart):
@@ -110,14 +129,13 @@ func _process(delta):
 			if (animateArms):
 				$spriteJoint/armLJoint/armL.offset.y = abs(sin(infTimer * 2) * 2);
 				$spriteJoint/armRJoint/armR.offset.y = abs(sin(infTimer * 3) * 2);
-				$spriteJoint/armLJoint.rotation = (sin(infTimer * 3) * 0.3);
+				$spriteJoint/armLJoint.rotation = (sin(infTimer * 3) * 0.3 * rotationAmp);
 				if (!aimPipis && !ringringPickUpThePhone):
-					#$spriteJoint/armRJoint.rotation = (sin(infTimer * 4) * 0.3);
-					$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation,(sin(infTimer * 4) * 0.3), 20 * delta);
+					$spriteJoint/armRJoint.rotation = lerp_angle($spriteJoint/armRJoint.rotation,(sin(infTimer * 4) * 0.3 * rotationAmp), 20 * delta);
 			
 			if (animateLegs):
-				$spriteJoint/legLJoint.rotation = (sin(infTimer * 3.2) * 0.3);
-				$spriteJoint/legRJoint.rotation = (sin(infTimer * 4.2) * 0.3);
+				$spriteJoint/legLJoint.rotation = (sin(infTimer * 3.2) * 0.3 * rotationAmp);
+				$spriteJoint/legRJoint.rotation = (sin(infTimer * 4.2) * 0.3 * rotationAmp);
 		else:
 			$spriteJoint/headJoint/head.playing = false;
 			$spriteJoint/headJoint/head.frame = 2;

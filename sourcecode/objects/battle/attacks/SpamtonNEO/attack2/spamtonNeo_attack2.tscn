@@ -93,7 +93,6 @@ texture = ExtResource( 3 )
 position = Vector2( 32, 0 )
 frames = ExtResource( 2 )
 animation = "phonehead"
-frame = 1
 playing = true
 
 [node name="HitBox" type="Area2D" parent="spamtonPhoneHead"]
