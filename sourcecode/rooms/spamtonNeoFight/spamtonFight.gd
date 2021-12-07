@@ -17,6 +17,8 @@ var battleSelectionConfirmed:bool = false;
 var battleEnemyAttacking:bool = false;
 var battleEnemyFiredAttack:bool = false;
 var battleEnemyAttackCount:int = 0;
+var battleIncreaseDifficulty:bool = false;
+var battleSpecialAttack:bool = false;
 
 var spamtonAttack0 = preload("res://objects/battle/attacks/SpamtonNEO/attack0/spamtonNeo_attack0.tscn");
 var spamtonAttack1 = preload("res://objects/battle/attacks/SpamtonNEO/attack1/spamtonNeo_attack1.tscn");
@@ -57,8 +59,15 @@ func HandleBattle(delta):
 	HandleBattleVisuals(delta);
 
 func HandleAttack():
+	
+	if (!battleSpecialAttack && $spamtonNEO.health <= 1000):
+		battleIncreaseDifficulty = true;
+		battleSpecialAttack = true;
+	
 	if (battleEnemyAttackCount == 0):
 		var tmpScene = spamtonAttack6.instance();
+		if (battleIncreaseDifficulty):
+			tmpScene.fireCannon = true;
 		get_tree().current_scene.add_child(tmpScene);
 		return;
 	if (battleEnemyAttackCount == 1):
@@ -80,10 +89,12 @@ func HandleAttack():
 	if (battleEnemyAttackCount == 5):
 		var tmpScene = spamtonAttack3.instance();
 		get_tree().current_scene.add_child(tmpScene);
+		battleIncreaseDifficulty = true;
 		return;
 	if (battleEnemyAttackCount == 6 || battleEnemyAttackCount != 6):
 		var tmpScene = spamtonAttack4.instance();
 		get_tree().current_scene.add_child(tmpScene);
+		battleEnemyAttackCount = -1;
 		return;
 
 func HandleBattleHud(delta):

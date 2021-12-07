@@ -9,6 +9,10 @@ export (float) var spitTime:float = 0.0;
 var spatPellet:bool = false;
 
 export (Vector2) var moveDir:Vector2 = Vector2.ZERO;
+onready var originalMoveDir:Vector2 = moveDir;
+export (bool) var slowDown:bool = false;
+var slowDownAmp:float = 1.0;
+var slowDownState:bool = false;
 export (bool) var requiresChargedShot:bool = false;
 
 var sndBreak = preload("res://objects/sounds/sndProjectileBreak.tscn");
@@ -22,15 +26,28 @@ func _ready():
 func _process(delta):
 	
 	lifeTime += delta;
+	
+	if (spitTime - 1.0 <= lifeTime):
+		if (slowDown):
+			if (!slowDownState):
+				slowDownAmp = clamp(slowDownAmp - (delta), 0.0, 1.0);
+			else:
+				slowDownAmp = clamp(slowDownAmp + (delta), 0.0, 1.0);
+			if (slowDownAmp == 0.0):
+				slowDownState = !slowDownState;
+			moveDir = originalMoveDir * slowDownAmp;
+	
 	global_transform.origin += moveDir * delta;
 	
 	if (spitPellet):
-		if (spitTime <= lifeTime && lifeTime <= spitTime + 0.5):
+		if (spitTime <= lifeTime && lifeTime <= spitTime + 0.15):
 			$AnimatedSprite.frame = 1;
 			if (!spatPellet):
+				var USERSOUL = get_tree().current_scene.get_node("USER_SOUL")
 				var tmpObj = projPellet.instance();
 				get_tree().current_scene.add_child(tmpObj);
-				tmpObj.transform.origin = transform.origin;
+				tmpObj.global_transform.origin = global_transform.origin;
+				tmpObj.moveDir = (USERSOUL.global_transform.origin - global_transform.origin).normalized() * 100;
 				spatPellet = true;
 		else:
 			$AnimatedSprite.frame = 0;
