@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/spamtonHeal.ogg-aa780f691f125c7b1e9daa712c941ced.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/spamtonHeal.ogg"
+dest_files=[ "res://.import/spamtonHeal.ogg-aa780f691f125c7b1e9daa712c941ced.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

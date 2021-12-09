@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/smile.ogg-63405be2b2b441443f23fa076ddebd88.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/smile.ogg"
+dest_files=[ "res://.import/smile.ogg-63405be2b2b441443f23fa076ddebd88.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

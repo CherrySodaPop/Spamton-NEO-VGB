@@ -11,5 +11,5 @@ dest_files=[ "res://.import/shinkansen.ogg-b5ed929af3b56159ad2cb32f0a933471.oggs
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

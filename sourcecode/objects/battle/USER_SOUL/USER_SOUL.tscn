@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://objects/battle/USER_SOUL/USER_SOUL.gd" type="Script" id=1]
 [ext_resource path="res://assets/battle/assetUSERSOUL.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://assets/sounds/soulHurt.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/soulCharge.ogg" type="AudioStream" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 2.5
@@ -28,3 +29,7 @@ shape = SubResource( 1 )
 [node name="soulHurt" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = 16.0
+
+[node name="soulCharge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+pitch_scale = 0.01

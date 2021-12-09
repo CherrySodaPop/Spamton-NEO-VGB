@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/soulCharge.ogg-b4e29e16025bd63ca0901ea99eeb015e.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/soulCharge.ogg"
+dest_files=[ "res://.import/soulCharge.ogg-b4e29e16025bd63ca0901ea99eeb015e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

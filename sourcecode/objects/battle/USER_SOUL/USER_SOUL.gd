@@ -22,6 +22,7 @@ var startMettatonFightTimer:float = 0.0;
 var projMettaton = preload("res://objects/battle/projectiles/USER_SOUL/projMettatonPellet.tscn");
 var projMettatonCharged = preload("res://objects/battle/projectiles/USER_SOUL/projMettatonPelletCharged.tscn");
 
+var SOUL_SHINE = preload("res://objects/battle/USER_SOUL/USER_SOUL_SHINE.tscn");
 var WAITING_FOR_USER:bool = false;
 var WAITING_FOR_USER_COUNT:int = 0;
 var WAITING_FOR_USER_TOTAL_COUNT:int = 0;
@@ -74,8 +75,15 @@ func HandleMovement(delta):
 
 func HandleShooting(delta):
 	zapTimer += delta;
+	$soulCharge.pitch_scale = clamp((chargeTimer- 0.1) / 0.4, 0.01, 1.0);
+	
+	print($soulCharge.pitch_scale)
+	if ($soulCharge.pitch_scale <= 0.01):
+		$soulCharge.volume_db = -80.0;
+	else:
+		$soulCharge.volume_db = 0;
+	
 	if (canShoot):
-		
 		if (Input.is_action_pressed("confirm")):
 			chargeTimer += delta;
 		
@@ -114,7 +122,7 @@ func HandleMettatonFight(delta):
 		$spriteJoint.rotation = lerp($spriteJoint.rotation,deg2rad(-90),0.5);
 		startMettatonFightTimer += delta;
 		
-	if (startMettatonFightTimer > 1.0):
+	if (startMettatonFightTimer > 1.5):
 		$spriteJoint/sprite.animation = "SOUL_METTATON";
 
 func AlphysPhoneCallActivate():
@@ -138,6 +146,7 @@ func WAIT_FOR_USER():
 func WAITING_FOR_USER(delta):
 	if (WAITING_FOR_USER):
 		if (WAITING_FOR_USER_COUNT == 5 && WAITING_FOR_USER_TOTAL_COUNT != 15):
+			canShoot = false;
 			get_tree().current_scene.get_node("AnimationPlayer").play("intro");
 			WAITING_FOR_USER = false;
 			WAITING_FOR_USER_COUNT = 0;
@@ -147,4 +156,5 @@ func WAITING_FOR_USER(delta):
 			get_tree().current_scene.get_node("spamtonLaugh").playing = true;
 			get_tree().current_scene.get_node("AnimationPlayer").seek(0.0);
 			get_tree().current_scene.get_node("AnimationPlayer").play("beginFight");
+			canShoot = true;
 			disableSoul = true;
