@@ -59,8 +59,8 @@ func HandleBattle(delta):
 	HandleBattleVisuals(delta);
 
 func HandleAttack():
-	
 	if (!battleSpecialAttack && $spamtonNEO.health <= 1000):
+		battleEnemyAttackCount = 6;
 		battleIncreaseDifficulty = true;
 		battleSpecialAttack = true;
 	
@@ -90,8 +90,9 @@ func HandleAttack():
 		var tmpScene = spamtonAttack3.instance();
 		get_tree().current_scene.add_child(tmpScene);
 		battleIncreaseDifficulty = true;
+		battleEnemyAttackCount = -1;
 		return;
-	if (battleEnemyAttackCount == 6 || battleEnemyAttackCount != 6):
+	if (battleSpecialAttack && battleEnemyAttackCount == 6):
 		var tmpScene = spamtonAttack4.instance();
 		get_tree().current_scene.add_child(tmpScene);
 		battleEnemyAttackCount = -1;

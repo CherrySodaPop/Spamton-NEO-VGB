@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/enemies/spamtonNEO/wireSnapped.gd" type="Script" id=1]
+
+[node name="wireSnapped" type="Line2D"]
+z_index = -1
+points = PoolVector2Array( 0, 0, 0, -112 )
+width = 1.0
+default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
+script = ExtResource( 1 )

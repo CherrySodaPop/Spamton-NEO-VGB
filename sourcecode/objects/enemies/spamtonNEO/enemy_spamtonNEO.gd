@@ -1,7 +1,10 @@
 extends Node2D
 
 var health:int = 4809;
+var prevHealth:int = health;
 var wireHealth:int = 100;
+var prevWireHealth:int = wireHealth;
+var animateDamageTime = 0.75;
 var aimPipis:bool = true;
 var aimPipisFire:bool = false;
 var aimPipisFireTimer:float = 0.0;
@@ -23,14 +26,38 @@ var chainedHeartBounceDir:int = 0;
 var chainedHeartYOffset:int = 0;
 
 var infTimer:float = 0.0;
+var lifeTimer:float = 0.0;
+
+var effectWire = preload("res://objects/enemies/spamtonNEO/wireSnapped.tscn")
 
 func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
+	lifeTimer += delta;
 	$spriteJoint/String1.points[0].x = sin(infTimer * 5) * 1.5;
 	$spriteJoint/String2.points[0].x = sin(infTimer * 3) * 1.5;
 	$spriteJoint/String3.points[0].x = sin(infTimer * 2) * 1.5;
+	
+	if ((prevHealth != health) || (prevWireHealth != wireHealth)):
+		if (animateDamageTime == 0.75):
+			if (prevHealth != health):
+				infTimer += rand_range(10,20);
+				rotationAmp = 5.0
+			if (prevWireHealth != wireHealth):
+				CreateBrokenWires()
+		else:
+			if (prevHealth != health): animateBody = false;
+		
+		animateDamageTime -= delta;
+		
+		if (animateDamageTime <= 0.0):
+			prevHealth = health;
+			prevWireHealth = wireHealth;
+			animateBody = true;
+			rotationAmp = 1.0
+			animateDamageTime = 0.75;
+		$spriteJoint.transform.origin.x = sin(lifeTimer*40) * (animateDamageTime / 0.75) * 4.0;
 	
 	if (ringring):
 		ringringTimer += delta
@@ -101,8 +128,9 @@ func _process(delta):
 		$spriteJoint/armRJoint/armR.frame = 1;
 		$spriteJoint/headJoint/head.frame = 2;
 	else:
-		rotationAmp = 1.0;
-		$spriteJoint/armRJoint/armR.frame = 0;
+		if (rotationAmp == 2.5):
+			rotationAmp = 1.0;
+			$spriteJoint/armRJoint/armR.frame = 0;
 	
 	if (!chainedHeart):
 		$spriteJoint/chainedHeart.visible = false;
@@ -184,3 +212,20 @@ func _process(delta):
 
 func ToggleAnimation():
 	animateBody = !animateBody;
+
+func CreateBrokenWires():
+	var tmpObj = effectWire.instance();
+	add_child(tmpObj);
+	tmpObj.global_transform.origin = global_transform.origin; + Vector2(-1,0);
+	
+	tmpObj = effectWire.instance();
+	add_child(tmpObj);
+	tmpObj.global_transform.origin = global_transform.origin + Vector2(-4,0);
+	
+	tmpObj = effectWire.instance();
+	add_child(tmpObj);
+	tmpObj.global_transform.origin = global_transform.origin + Vector2(1,0);
+	
+	tmpObj = effectWire.instance();
+	add_child(tmpObj);
+	tmpObj.global_transform.origin = global_transform.origin + Vector2(3,0);
