@@ -36,11 +36,11 @@ func _process(delta):
 	
 	$SOUL.offset.y = cos(HESITATE*2.0) * 2.0;
 	
-	if (HESITATE >= 2.0): $DIALOGUE0.SPEAK = true;
-	if (HESITATE >= 8.0): $DIALOGUE1.SPEAK = true;
-	if (HESITATE >= 20.0): $DIALOGUE2.SPEAK = true;
-	if (HESITATE >= 35.0): $DIALOGUE3.SPEAK = true;
-	if (HESITATE >= 48.0): $DIALOGUE4.SPEAK = true;
+	if (HESITATE >= 2.0): $VOICE0.SPEAK = true;
+	if (HESITATE >= 8.0): $VOICE1.SPEAK = true;
+	if (HESITATE >= 20.0): $VOICE2.SPEAK = true;
+	if (HESITATE >= 35.0): $VOICE3.SPEAK = true;
+	if (HESITATE >= 48.0): $VOICE4.SPEAK = true;
 	
 	if (HESITATE >= 45.0):
 		if (GLOW == 0.0): $SOUL_APPEAR.playing = true;

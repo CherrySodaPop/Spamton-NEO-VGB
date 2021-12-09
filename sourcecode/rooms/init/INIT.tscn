@@ -2,7 +2,7 @@
 
 [ext_resource path="res://rooms/init/INIT.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/AUDIO_ANOTHERHIM.ogg" type="AudioStream" id=2]
-[ext_resource path="res://rooms/init/DIALOGUE0.tscn" type="PackedScene" id=3]
+[ext_resource path="res://rooms/init/VOICE.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sounds/SOUL_APPEAR.ogg" type="AudioStream" id=4]
 [ext_resource path="res://assets/IMAGES/IMAGE_USER_SOUL.png" type="Texture" id=5]
 [ext_resource path="res://assets/sounds/HIM_SHORT.ogg" type="AudioStream" id=6]
@@ -23,23 +23,23 @@ stream = ExtResource( 4 )
 stream = ExtResource( 6 )
 volume_db = 6.0
 
-[node name="DIALOGUE0" parent="." instance=ExtResource( 3 )]
+[node name="VOICE0" parent="." instance=ExtResource( 3 )]
 position = Vector2( -25, -40 )
 
-[node name="DIALOGUE1" parent="." instance=ExtResource( 3 )]
+[node name="VOICE1" parent="." instance=ExtResource( 3 )]
 position = Vector2( -73, -40 )
 WORDS = "YOU SHOULDN'T BE HERE."
 
-[node name="DIALOGUE2" parent="." instance=ExtResource( 3 )]
+[node name="VOICE2" parent="." instance=ExtResource( 3 )]
 position = Vector2( -56, -40 )
 WORDS = "  THIS \"PLACE\" IS
 OUTSIDE MY \"REACH.\""
 
-[node name="DIALOGUE3" parent="." instance=ExtResource( 3 )]
+[node name="VOICE3" parent="." instance=ExtResource( 3 )]
 position = Vector2( -63, -40 )
 WORDS = "DO YOU ACCEPT THIS?"
 
-[node name="DIALOGUE4" parent="." instance=ExtResource( 3 )]
+[node name="VOICE4" parent="." instance=ExtResource( 3 )]
 position = Vector2( -30, -40 )
 WORDS = "VERY WELL."
 

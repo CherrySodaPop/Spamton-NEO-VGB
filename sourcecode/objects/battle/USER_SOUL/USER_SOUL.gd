@@ -90,7 +90,7 @@ func HandleShooting(delta):
 			# default shooting
 			if (zapTimer >= 0.1 && chargeTimer <= 0.5):
 				var tmpObj = projMettaton.instance();
-				get_tree().root.add_child(tmpObj);
+				get_tree().current_scene.add_child(tmpObj);
 				tmpObj.global_transform.origin = global_transform.origin + Vector2(4,0);
 				tmpObj.z_index = z_index;
 				zapTimer = 0.0;
@@ -98,7 +98,7 @@ func HandleShooting(delta):
 			# charged shot
 			if (chargeTimer > 0.5):
 				var tmpObj = projMettatonCharged.instance();
-				get_tree().root.add_child(tmpObj);
+				get_tree().current_scene.add_child(tmpObj);
 				tmpObj.global_transform.origin = global_transform.origin + Vector2(4,0);
 				tmpObj.z_index = z_index;
 			

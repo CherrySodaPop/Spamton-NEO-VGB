@@ -6,7 +6,7 @@ var moveDir:Vector2 = Vector2.ZERO;
 func _ready():
 	randomize();
 	moveDir.x = rand_range(-90,90);
-	moveDir.y = rand_range(-100,-100);
+	moveDir.y = rand_range(-100,-60);
 	var randValue = randi() % 2;
 	if (randValue):
 		$PIECE0.visible = true;

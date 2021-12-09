@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/fonts/themeMaxFont.tres" type="Theme" id=1]
 [ext_resource path="res://rooms/init/VOICE.gd" type="Script" id=2]
 
-[node name="DIALOGUE0" type="Node2D"]
+[node name="VOICE" type="Node2D"]
 z_index = 10
 script = ExtResource( 2 )
 WORDS = "STRANGE."
