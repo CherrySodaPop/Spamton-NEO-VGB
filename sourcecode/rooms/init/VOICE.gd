@@ -3,6 +3,7 @@ extends Node2D
 var SPEAK:bool = false;
 var SPEAKHESITATE:float = 0.0;
 export (String, MULTILINE) var WORDS:String = "TEST";
+export (float) var SPEED:float = 1.0;
 
 func _ready():
 	$TALK0.visible_characters = 1;
@@ -19,7 +20,7 @@ func _ready():
 
 func _process(delta):
 	if(SPEAK):
-		SPEAKHESITATE += delta;
+		SPEAKHESITATE += delta * SPEED;
 		if (SPEAKHESITATE > 0.25 && $TALK0.percent_visible < 1.0):
 			$TALK0.visible_characters += 1;
 			$TEXTGLOW/TALK1.visible_characters += 1;

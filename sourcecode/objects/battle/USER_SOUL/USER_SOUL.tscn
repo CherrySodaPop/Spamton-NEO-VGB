@@ -33,3 +33,4 @@ volume_db = 16.0
 [node name="soulCharge" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 pitch_scale = 0.01
+autoplay = true

@@ -21,6 +21,7 @@ var ringringTimer:float = 0.0;
 var ringringPickUpThePhone:bool = false;
 
 var chainedHeart:bool = false;
+var chainedHeartSpringAmp:float = 1.0;
 var chainedHeartSpringTimer:float = 0.0;
 var chainedHeartBounceDir:int = 0;
 var chainedHeartYOffset:int = 0;
@@ -170,7 +171,7 @@ func _process(delta):
 	else:
 		$spriteJoint/chainedHeart.visible = true;
 		$spriteJoint/headJoint/head.playing = false;
-		chainedHeartSpringTimer += delta;
+		chainedHeartSpringTimer += delta * chainedHeartSpringAmp;
 		
 		if (chainedHeartBounceDir == 0):
 			if (chainedHeartSpringTimer >= 0.75):

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/AUDIO_DARKNESS.ogg-73f6b203a2334e958be7fb2756dccf78.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

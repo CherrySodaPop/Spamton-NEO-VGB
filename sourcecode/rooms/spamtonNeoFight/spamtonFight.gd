@@ -39,6 +39,10 @@ func _process(delta):
 func HandleBattle(delta):
 	if (!battleReady): return;
 	
+	if ($USER_SOUL.health <= 0):
+		Persistant.get_node("controller").USER_SOUL_POS = $USER_SOUL.transform.origin;
+		get_tree().change_scene("res://rooms/anEnd/ANEND.tscn");
+	
 	HandleBattleHud(delta);
 	
 	if (battleSelectionConfirmed):
@@ -59,7 +63,7 @@ func HandleBattle(delta):
 	HandleBattleVisuals(delta);
 
 func HandleAttack():
-	if (!battleSpecialAttack && $spamtonNEO.health <= 1000):
+	if (!battleSpecialAttack && ($spamtonNEO.health <= 1000 || $spamtonNEO.wireHealth <= 15)):
 		battleEnemyAttackCount = 6;
 		battleIncreaseDifficulty = true;
 		battleSpecialAttack = true;
@@ -72,6 +76,8 @@ func HandleAttack():
 		return;
 	if (battleEnemyAttackCount == 1):
 		var tmpScene = spamtonAttack0.instance();
+		if (battleIncreaseDifficulty):
+			$spamtonNEO.chainedHeartSpringAmp = 2.0;
 		get_tree().current_scene.add_child(tmpScene);
 		return;
 	if (battleEnemyAttackCount == 2):

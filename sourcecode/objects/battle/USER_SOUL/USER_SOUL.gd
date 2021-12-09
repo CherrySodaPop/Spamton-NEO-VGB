@@ -49,7 +49,7 @@ func _process(delta):
 	
 	if (!disableSoul):
 		HandleMovement(delta);
-		HandleShooting(delta);
+	HandleShooting(delta);
 		
 	HandleMettatonFight(delta);
 	
@@ -77,13 +77,12 @@ func HandleShooting(delta):
 	zapTimer += delta;
 	$soulCharge.pitch_scale = clamp((chargeTimer- 0.1) / 0.4, 0.01, 1.0);
 	
-	print($soulCharge.pitch_scale)
 	if ($soulCharge.pitch_scale <= 0.01):
 		$soulCharge.volume_db = -80.0;
 	else:
 		$soulCharge.volume_db = 0;
 	
-	if (canShoot):
+	if (canShoot && !disableSoul):
 		if (Input.is_action_pressed("confirm")):
 			chargeTimer += delta;
 		
