@@ -932,14 +932,17 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 3, 7, 13 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 3, 7.7, 12, 16 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "MY_WIRES"
 }, {
 "args": [  ],
 "method": "REAL_BOY"
+}, {
+"args": [  ],
+"method": "ARE_YOU_GETTING_THIS_MIKE"
 }, {
 "args": [  ],
 "method": "WATCH_ME_FLY_MAMA"
@@ -1102,14 +1105,12 @@ animation = "walk"
 position = Vector2( -112, 2 )
 frames = ExtResource( 10 )
 animation = "walk"
-frame = 1
 playing = true
 
 [node name="ralsei" type="AnimatedSprite" parent="world"]
 position = Vector2( -101, 21 )
 frames = ExtResource( 9 )
 animation = "walk"
-frame = 1
 playing = true
 
 [node name="intro_minispamtons" type="Node2D" parent="."]
