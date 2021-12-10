@@ -9,7 +9,7 @@ var battleDamage:int = 200;
 var battleWireDamage:int = 6;
 var battleDamageRandomRange:int = 100;
 var battleReady:bool = false;
-var battleShowHud:bool = true;
+var battleShowHud:bool = false;
 var battleSelectionHud:int = 0;
 var battleSelectionWaitTime:float = 0.0;
 var battleInputWaitTimeHud:float = 0.0;
@@ -19,6 +19,10 @@ var battleEnemyFiredAttack:bool = false;
 var battleEnemyAttackCount:int = 0;
 var battleIncreaseDifficulty:bool = false;
 var battleSpecialAttack:bool = false;
+
+var spamtonRealBoy:bool = false;
+var spamtonShakeTimer:float = 0.0;
+var spamtonShakeAmp:float = 0.0;
 
 var spamtonAttack0 = preload("res://objects/battle/attacks/SpamtonNEO/attack0/spamtonNeo_attack0.tscn");
 var spamtonAttack1 = preload("res://objects/battle/attacks/SpamtonNEO/attack1/spamtonNeo_attack1.tscn");
@@ -30,11 +34,17 @@ var spamtonAttack6 = preload("res://objects/battle/attacks/SpamtonNEO/attack6/sp
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$AnimationPlayer.play("intro")
+	$AnimationPlayer.play("intro");
 
 func _process(delta):
 	RIDE_AROUND_TOWN(delta);
 	HandleBattle(delta);
+	HandleBattleHud(delta);
+	HandleBattleVisuals(delta);
+	
+	if (spamtonRealBoy):
+		spamtonShakeTimer += delta;
+		$spamtonNEO.transform.origin.y = sin(spamtonShakeTimer * 10) * spamtonShakeAmp;
 
 func HandleBattle(delta):
 	if (!battleReady): return;
@@ -43,7 +53,19 @@ func HandleBattle(delta):
 		Persistant.get_node("controller").USER_SOUL_POS = $USER_SOUL.transform.origin;
 		get_tree().change_scene("res://rooms/anEnd/ANEND.tscn");
 	
-	HandleBattleHud(delta);
+	if ($spamtonNEO.health <= 0):
+		pass
+	
+	if ($spamtonNEO.wireHealth <= 0):
+		battleReady = false;
+		battleShowHud = false;
+		TURN_IT_UP_BABY = false;
+		$spamtonNEO/spriteJoint/String1.visible = false;
+		$spamtonNEO/spriteJoint/String3.visible = false;
+		$bigshot.playing = false;
+		$AnimationPlayer.play("realboy");
+	
+	#HandleBattleHud(delta);
 	
 	if (battleSelectionConfirmed):
 		battleSelectionWaitTime += delta;
@@ -59,8 +81,6 @@ func HandleBattle(delta):
 			battleSelectionConfirmed = false;
 			battleSelectionWaitTime = 0.0;
 			battleEnemyAttackCount += 1;
-	
-	HandleBattleVisuals(delta);
 
 func HandleAttack():
 	if (!battleSpecialAttack && ($spamtonNEO.health <= 1000 || $spamtonNEO.wireHealth <= 15)):
@@ -115,28 +135,35 @@ func HandleBattleHud(delta):
 	
 	if (battleSelectionConfirmed): return;
 	
-	if (Input.is_action_just_pressed("moveLeft")):
-		battleSelectionHud -= 1;
-	if (Input.is_action_just_pressed("moveRight")):
-		battleSelectionHud += 1;
+	if (battleReady):
+		if (Input.is_action_just_pressed("moveLeft")):
+			battleSelectionHud -= 1;
+		if (Input.is_action_just_pressed("moveRight")):
+			battleSelectionHud += 1;
 	battleSelectionHud = clamp(battleSelectionHud,0,2);
 	
-	if (Input.is_action_just_pressed("confirm")):
-		if (battleSelectionHud == 0):
-			$spamtonNEO.wireHealth -= battleWireDamage;
-		if (battleSelectionHud == 1):
-			$spamtonNEO.health -= battleDamage + int(rand_range(-battleDamageRandomRange/2,battleDamageRandomRange/2));
-		if (battleSelectionHud == 2):
-			$USER_SOUL.damageMultiplier = 0.5;
-		
-		battleSelectionConfirmed = true;
+	if (battleReady):
+		if (Input.is_action_just_pressed("confirm")):
+			if (battleSelectionHud == 0):
+				$spamtonNEO.wireHealth -= battleWireDamage;
+			if (battleSelectionHud == 1):
+				$spamtonNEO.health -= battleDamage + int(rand_range(-battleDamageRandomRange/2,battleDamageRandomRange/2));
+			if (battleSelectionHud == 2):
+				$USER_SOUL.damageMultiplier = 0.5;
+			
+			battleSelectionConfirmed = true;
 
 func HandleBattleVisuals(delta):
 	# battle hud
 	if (battleShowHud):
-		$BattleHud.global_transform.origin.y += (48 - $BattleHud.global_transform.origin.y) * (15 * delta);
+		$BattleHud.transform.origin.y += (48 - $BattleHud.transform.origin.y) * (15 * delta);
 	else:
-		$BattleHud.global_transform.origin.y += (68 - $BattleHud.global_transform.origin.y) * (15 * delta);
+		$BattleHud.transform.origin.y += (68 - $BattleHud.transform.origin.y) * (15 * delta);
+	
+	if (battleReady):
+		$HealthHud.transform.origin.y += (-$HealthHud.transform.origin.y) * (30 * delta);
+	else:
+		$HealthHud.transform.origin.y += (-10 - $HealthHud.transform.origin.y) * (30 * delta);
 	
 	$HealthHud/Line2D.points[1].x = -81 + (float($USER_SOUL.health) / float($USER_SOUL.healthMax)) * 54;
 	
@@ -187,4 +214,26 @@ func SHOW_ON_THE_RAIL():
 
 func PULL_THE_STRINGS():
 	battleReady = !battleReady;
+	battleShowHud = true;
 	$bigshot.playing = true;
+
+func MY_WIRES():
+	$spamtonNEO/spriteJoint/headJoint/head.frame = 1;
+	$spamtonNEO.rotationAmp = 0.0;
+	$spamtonNEO.animateBody = false;
+
+func REAL_BOY():
+	SHOW_ON_THE_RAIL();
+	$spamtonNEO/spriteJoint/headJoint/head.frame = 2;
+	$spamtonNEO.rotationAmp = 3.0;
+	$spamtonNEO.animateBody = true;
+	$realboy.playing = true;
+
+func ARE_YOU_GETTING_THIS_MIKE():
+	spamtonRealBoy = true;
+	spamtonShakeAmp = 8.0;
+
+func WATCH_ME_FLY_MAMA():
+	$spamtonNEO/spriteJoint/headJoint/head.frame = 0;
+	$spamtonNEO/spriteJoint/String2.visible = false;
+	$spamtonNEO.animateBody = false;

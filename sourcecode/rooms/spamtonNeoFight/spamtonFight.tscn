@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/tiles/world.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/overworld/spr_spamtonrails.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://objects/battle/USER_SOUL/USER_SOUL.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/battle/assetBattleUI.tres" type="SpriteFrames" id=19]
 [ext_resource path="res://assets/music/bigshot.ogg" type="AudioStream" id=20]
+[ext_resource path="res://assets/music/realboy.ogg" type="AudioStream" id=21]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -921,6 +922,30 @@ tracks/27/keys = {
 "values": [ true, false, true ]
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "realboy"
+length = 20.0
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3, 7, 13 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "MY_WIRES"
+}, {
+"args": [  ],
+"method": "REAL_BOY"
+}, {
+"args": [  ],
+"method": "WATCH_ME_FLY_MAMA"
+} ]
+}
+
 [node name="spamtonNeoFight" type="Node2D"]
 script = ExtResource( 5 )
 
@@ -928,6 +953,7 @@ script = ExtResource( 5 )
 anims/RESET = SubResource( 2 )
 anims/beginFight = SubResource( 3 )
 anims/intro = SubResource( 1 )
+anims/realboy = SubResource( 4 )
 
 [node name="spamtonLaugh" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -950,6 +976,9 @@ stream = ExtResource( 14 )
 
 [node name="bigshot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
+
+[node name="realboy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
 
 [node name="world" type="Node2D" parent="."]
 
@@ -1073,12 +1102,14 @@ animation = "walk"
 position = Vector2( -112, 2 )
 frames = ExtResource( 10 )
 animation = "walk"
+frame = 1
 playing = true
 
 [node name="ralsei" type="AnimatedSprite" parent="world"]
 position = Vector2( -101, 21 )
 frames = ExtResource( 9 )
 animation = "walk"
+frame = 1
 playing = true
 
 [node name="intro_minispamtons" type="Node2D" parent="."]

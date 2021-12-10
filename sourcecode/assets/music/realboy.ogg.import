@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/realboy.ogg-ecfd3a88c6fd0394c3f7f7e3e6ae0c86.oggstr"
+
+[deps]
+
+source_file="res://assets/music/realboy.ogg"
+dest_files=[ "res://.import/realboy.ogg-ecfd3a88c6fd0394c3f7f7e3e6ae0c86.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

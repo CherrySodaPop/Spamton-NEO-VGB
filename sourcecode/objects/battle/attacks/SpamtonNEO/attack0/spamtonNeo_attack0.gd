@@ -10,4 +10,3 @@ func _process(delta):
 	if (lifeTimer > 9.0):
 		get_tree().current_scene.ExitAttack();
 		queue_free();
-	

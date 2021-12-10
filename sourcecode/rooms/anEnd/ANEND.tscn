@@ -26,7 +26,7 @@ WORDS = "WILL YOU PERSIST?"
 SPEED = 1.5
 
 [node name="VOICE2" parent="." instance=ExtResource( 1 )]
-position = Vector2( -78, -39 )
+position = Vector2( -53, -39 )
 WORDS = "THEN, THE FUTURE
 IS IN YOUR HANDS."
 SPEED = 1.5

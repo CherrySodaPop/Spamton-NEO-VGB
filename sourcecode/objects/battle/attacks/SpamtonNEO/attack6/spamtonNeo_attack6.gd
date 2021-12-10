@@ -23,7 +23,7 @@ func _process(delta):
 	var USERSOUL = get_tree().current_scene.get_node("USER_SOUL")
 	
 	if (fireCannon):
-		if (lifeTimer < 7.0):
+		if (lifeTimer < 6.0):
 			SPAMTONNEO.get_node("spriteJoint").transform.origin.x = (sin(lifeTimer*2) * 15) + 5
 			SPAMTONNEO.get_node("spriteJoint").transform.origin.y = (sin(lifeTimer*3) * 20)
 		if (SPAMTONNEO.aimPipisState != prevAimPipisState):
@@ -32,10 +32,10 @@ func _process(delta):
 			tmpObj.global_transform.origin = SPAMTONNEO.get_node("spriteJoint/armRJoint").global_transform.origin;
 			tmpObj.moveDir = (USERSOUL.global_transform.origin - SPAMTONNEO.get_node("spriteJoint/armRJoint").global_transform.origin).normalized() * 80;
 			prevAimPipisState = SPAMTONNEO.aimPipisState;
-		if (lifeTimer >= 7.0):
+		if (lifeTimer >= 6.0):
 			SPAMTONNEO.get_node("spriteJoint").transform.origin = lerp(SPAMTONNEO.get_node("spriteJoint").transform.origin, Vector2.ZERO, 2.0 * delta);
 	
-	if (lifeTimer >= 8.0):
+	if (lifeTimer >= 7.0):
 		get_tree().current_scene.get_node("spamtonNEO").aimPipis = false;
 		get_tree().current_scene.get_node("spamtonNEO").aimPipisFire = false;
 		get_tree().current_scene.ExitAttack();
