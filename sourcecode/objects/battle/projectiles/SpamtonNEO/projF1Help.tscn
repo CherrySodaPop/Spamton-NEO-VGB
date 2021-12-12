@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/characters/spamtonNEO/spamtonNEO.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://objects/battle/projectiles/SpamtonNEO/projF1Help.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/pacify.ogg" type="AudioStream" id=3]
+
+[node name="projF1Help" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="kris" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -84 )
+z_index = 1
+frames = ExtResource( 1 )
+animation = "angel"
+playing = true
+
+[node name="susie" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -84 )
+z_index = 1
+frames = ExtResource( 1 )
+animation = "angel"
+playing = true
+
+[node name="ralsei" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -84 )
+z_index = 1
+frames = ExtResource( 1 )
+animation = "angel"
+frame = 1
+playing = true
+
+[node name="sparkle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -5.0
+autoplay = true

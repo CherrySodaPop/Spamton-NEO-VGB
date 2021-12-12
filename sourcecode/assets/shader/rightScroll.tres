@@ -3,12 +3,12 @@
 [resource]
 code = "shader_type canvas_item;
 
-uniform float speedAmp : hint_range(0,3.0);
+uniform float offset;
 
 void fragment()
 {
 	vec2 uv_changed = UV;
-	uv_changed.x += TIME * speedAmp;
+	uv_changed.x += offset;
 	vec4 c = texture(TEXTURE, uv_changed);
 	COLOR = c;
 } "

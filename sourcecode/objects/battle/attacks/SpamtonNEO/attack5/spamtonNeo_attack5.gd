@@ -77,7 +77,6 @@ func _process(delta):
 		if (eyeTimer >= 3.0):
 			eyeTimer = 0.0;
 			eyeTick = 0.0;
-			$spamtonBox/Head/Bottom.frame = 0;
 		if (eyeTick >= 0.1):
 			var tmpObj = projPellet.instance();
 			add_child(tmpObj);

@@ -20,9 +20,20 @@ var battleEnemyAttackCount:int = 0;
 var battleIncreaseDifficulty:bool = false;
 var battleSpecialAttack:bool = false;
 
+var F1Help:bool = false;
+
+var railOffset:float = 0.0;
+var bigCityOffset0:float = 0.0;
+var bigCityOffset1:float = 0.0;
+
 var spamtonRealBoy:bool = false;
 var spamtonShakeTimer:float = 0.0;
 var spamtonShakeAmp:float = 0.0;
+
+var prevSoulBigshots:int = 0;
+var soulBigshots:int = 0;
+var soulBigShotsTimer:float = 0.0;
+var cheater:bool = false;
 
 var spamtonAttack0 = preload("res://objects/battle/attacks/SpamtonNEO/attack0/spamtonNeo_attack0.tscn");
 var spamtonAttack1 = preload("res://objects/battle/attacks/SpamtonNEO/attack1/spamtonNeo_attack1.tscn");
@@ -31,6 +42,8 @@ var spamtonAttack3 = preload("res://objects/battle/attacks/SpamtonNEO/attack3/sp
 var spamtonAttack4 = preload("res://objects/battle/attacks/SpamtonNEO/attack4/spamtonNeo_attack4.tscn");
 var spamtonAttack5 = preload("res://objects/battle/attacks/SpamtonNEO/attack5/spamtonNeo_attack5.tscn");
 var spamtonAttack6 = preload("res://objects/battle/attacks/SpamtonNEO/attack6/spamtonNeo_attack6.tscn");
+
+var projF1Help = preload("res://objects/battle/projectiles/SpamtonNEO/projF1Help.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,20 +54,30 @@ func _process(delta):
 	HandleBattle(delta);
 	HandleBattleHud(delta);
 	HandleBattleVisuals(delta);
+	HandleEnragedSpamton(delta);
 	
 	if (spamtonRealBoy):
 		spamtonShakeTimer += delta;
-		$spamtonNEO.transform.origin.y = sin(spamtonShakeTimer * 10) * spamtonShakeAmp;
+		$spamtonNEO/spriteJoint.transform.origin.x = sin(spamtonShakeTimer * 5) * spamtonShakeAmp;
+		$spamtonNEO/spriteJoint.transform.origin.y = sin(spamtonShakeTimer * 10) * spamtonShakeAmp;
 
 func HandleBattle(delta):
 	if (!battleReady): return;
+	
+	if (!F1Help && !battleEnemyAttacking && Input.is_action_just_pressed("f1_help")):
+		add_child(projF1Help.instance());
+		F1Help = true;
 	
 	if ($USER_SOUL.health <= 0):
 		Persistant.get_node("controller").USER_SOUL_POS = $USER_SOUL.transform.origin;
 		get_tree().change_scene("res://rooms/anEnd/ANEND.tscn");
 	
 	if ($spamtonNEO.health <= 0):
-		pass
+		battleReady = false;
+		battleShowHud = false;
+		TURN_IT_UP_BABY = false;
+		$bigshot.playing = false;
+		$AnimationPlayer.play("spamtonEX");
 	
 	if ($spamtonNEO.wireHealth <= 0):
 		battleReady = false;
@@ -149,7 +172,7 @@ func HandleBattleHud(delta):
 			if (battleSelectionHud == 1):
 				$spamtonNEO.health -= battleDamage + int(rand_range(-battleDamageRandomRange/2,battleDamageRandomRange/2));
 			if (battleSelectionHud == 2):
-				$USER_SOUL.damageMultiplier = 0.5;
+				$USER_SOUL.guard = true;
 			
 			battleSelectionConfirmed = true;
 
@@ -165,7 +188,7 @@ func HandleBattleVisuals(delta):
 	else:
 		$HealthHud.transform.origin.y += (-10 - $HealthHud.transform.origin.y) * (30 * delta);
 	
-	$HealthHud/Line2D.points[1].x = -81 + (float($USER_SOUL.health) / float($USER_SOUL.healthMax)) * 54;
+	$HealthHud/Line2D.points[1].x = -81 + clamp(float($USER_SOUL.health) / float($USER_SOUL.healthMax), 0.0, 1.0) * 54;
 	
 	$BattleHud/snap.frame = (battleShowHud && battleSelectionHud == 0);
 	$BattleHud/fight.frame = (battleShowHud && battleSelectionHud == 1);
@@ -173,10 +196,10 @@ func HandleBattleVisuals(delta):
 	
 	# the box thingy
 	if (battleEnemyAttacking):
-		SOUL_BOX_ROTATION = rad2deg(lerp_angle(deg2rad(SOUL_BOX_ROTATION),0, 10 * delta));
+		SOUL_BOX_ROTATION = rad2deg(lerp(deg2rad(SOUL_BOX_ROTATION),0, 10 * delta));
 		$USER_SOUL_BOX.scale = $USER_SOUL_BOX.scale + (Vector2(2,2) * delta);
 	else:
-		SOUL_BOX_ROTATION = rad2deg(lerp_angle(deg2rad(SOUL_BOX_ROTATION),PI, 8 * delta));
+		SOUL_BOX_ROTATION = rad2deg(lerp(deg2rad(SOUL_BOX_ROTATION),PI, 8 * delta));
 		$USER_SOUL_BOX.scale = $USER_SOUL_BOX.scale - (Vector2(2,2) * delta);
 		
 		if ($USER_SOUL_BOX.scale.x < 0.1):
@@ -186,10 +209,24 @@ func HandleBattleVisuals(delta):
 			$USER_SOUL_BOX/Wide/CollisionShape2D.disabled = true;
 		
 		$world/OverlayBright.modulate.a = $world/OverlayBright.modulate.a - (delta * 2.0);
-		
+	
 	$USER_SOUL_BOX.rotation_degrees = round(SOUL_BOX_ROTATION);
 	$USER_SOUL_BOX.scale.x = clamp($USER_SOUL_BOX.scale.x, 0.0, 1.0);
 	$USER_SOUL_BOX.scale.y = clamp($USER_SOUL_BOX.scale.y, 0.0, 1.0);
+
+func HandleEnragedSpamton(delta):
+	if (!cheater):
+		soulBigShotsTimer += delta;
+		if (prevSoulBigshots != soulBigshots):
+			soulBigShotsTimer = 0.0;
+			prevSoulBigshots = soulBigshots;
+		if (soulBigShotsTimer >= 1.0):
+			prevSoulBigshots = 0;
+			soulBigshots = 0;
+		if (soulBigshots >= 10):
+			$spamtonNEO.WHYYOULITTLE = true;
+			$USER_SOUL.damageMultiplier = 2.0;
+			cheater = true;
 
 func ExitAttack():
 	battleShowHud = true;
@@ -198,13 +235,17 @@ func ExitAttack():
 
 func RIDE_AROUND_TOWN(delta):
 	if (TURN_IT_UP_BABY):
-		TURN_IT_UP_BABY_AMP = clamp(TURN_IT_UP_BABY_AMP + delta,0.0,3.0);
+		TURN_IT_UP_BABY_AMP = clamp(TURN_IT_UP_BABY_AMP + delta,0.0,1.0);
 	else:
-		TURN_IT_UP_BABY_AMP = clamp(TURN_IT_UP_BABY_AMP - delta,0.0,3.0);
+		TURN_IT_UP_BABY_AMP = clamp(TURN_IT_UP_BABY_AMP - (delta / 2.0),0.0,1.0);
 	
-	$world/rails/railKris.material.set("shader_param/speedAmp",TURN_IT_UP_BABY_AMP);
-	$world/rails/railSusie.material.set("shader_param/speedAmp",TURN_IT_UP_BABY_AMP);
-	$world/rails/railRalsei.material.set("shader_param/speedAmp",TURN_IT_UP_BABY_AMP);
+	railOffset += (TURN_IT_UP_BABY_AMP * 3.0) * delta;
+	bigCityOffset0 += (TURN_IT_UP_BABY_AMP / 2.0) * delta;
+	bigCityOffset1 += TURN_IT_UP_BABY_AMP * delta;
+	
+	$world/rails/railKris.material.set("shader_param/offset",railOffset);
+	$world/rails/bigcity0.material.set("shader_param/offset",bigCityOffset0);
+	$world/rails/bigcity1.material.set("shader_param/offset",bigCityOffset1);
 
 func ShakeCamera():
 	Persistant.get_node("controllerCamera").shakeAmp = 3.0;
@@ -234,6 +275,17 @@ func ARE_YOU_GETTING_THIS_MIKE():
 	spamtonShakeAmp = 8.0;
 
 func WATCH_ME_FLY_MAMA():
+	$realboy.playing = false;
 	$spamtonNEO/spriteJoint/headJoint/head.frame = 0;
 	$spamtonNEO/spriteJoint/String2.visible = false;
+	$spamtonNEO/damage.playing = true;
 	$spamtonNEO.animateBody = false;
+	TURN_IT_UP_BABY_AMP = 0.0;
+	SHOW_ON_THE_RAIL();
+	spamtonShakeAmp = 0.0;
+
+func JustASimplePuppet():
+	get_tree().change_scene("res://rooms/spamtonNeoFight/spamtonFallFromHeaven.tscn");
+
+func EXForm():
+	get_tree().change_scene("res://rooms/creditsAndMenu/creditsAndMenu.tscn");

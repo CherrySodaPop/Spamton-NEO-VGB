@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://objects/battle/attacks/SpamtonNEO/attack3/spamtonNeo_attack3.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonArmPipis.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/phonecall.ogg" type="AudioStream" id=3]
 
 [node name="spamtonNeo_attack3" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,3 +20,7 @@ offset = Vector2( 0, 10 )
 
 [node name="FIREPOINT" type="Node2D" parent="MYARM"]
 position = Vector2( -0.499134, 22.6661 )
+
+[node name="ringring" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = 10.0

@@ -10,6 +10,7 @@ export (bool) var requiresChargedShot:bool = false;
 func _ready():
 	set_meta("projectileType", "ENEMY");
 	set_meta("damageAmount", 30);
+	set_meta("destroyBigShot", true);
 
 func _process(delta):
 	

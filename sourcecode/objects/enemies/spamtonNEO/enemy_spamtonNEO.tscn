@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/characters/spamtonNEO/spamtonNEO.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://objects/enemies/spamtonNEO/enemy_spamtonNEO.gd" type="Script" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonAREYOUSERIOUS.png" type="Texture" id=6]
 [ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonWHAT.png" type="Texture" id=7]
 [ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonITSFORYOU.png" type="Texture" id=8]
+[ext_resource path="res://assets/sounds/enemyHurtSound.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/pacify.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/spamtonWreck.ogg" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/explosion.ogg" type="AudioStream" id=12]
 
 [node name="spamtonNEO" type="Node2D"]
 script = ExtResource( 2 )
@@ -91,6 +95,7 @@ position = Vector2( 0, -15 )
 position = Vector2( 0, -7 )
 frames = ExtResource( 1 )
 animation = "head"
+frame = 2
 playing = true
 
 [node name="armLJoint" type="Node2D" parent="spriteJoint"]
@@ -144,6 +149,7 @@ default_color = Color( 0.67451, 0.882353, 0.329412, 1 )
 position = Vector2( -21, -70 )
 frames = ExtResource( 1 )
 animation = "phone"
+frame = 1
 playing = true
 
 [node name="WHAT" type="Sprite" parent="ringring"]
@@ -153,3 +159,20 @@ texture = ExtResource( 7 )
 [node name="ITSFORYOU" type="Sprite" parent="ringring"]
 position = Vector2( -20, -36 )
 texture = ExtResource( 8 )
+
+[node name="damage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = 6.017
+
+[node name="pacify" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -16.331
+
+[node name="wreck" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -2.0
+pitch_scale = 0.4
+
+[node name="explode" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = 18.05

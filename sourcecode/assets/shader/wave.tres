@@ -1,0 +1,15 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float freq : hint_range(0,20.0);
+uniform float amp : hint_range(0,1.0);
+
+void fragment()
+{
+	float calc = sin(freq * UV.y + (TIME));
+	vec2 sample = vec2(UV.x + sin(calc) * amp, UV.y);
+	vec4 c = texture(TEXTURE, sample);
+	COLOR = c;
+} "

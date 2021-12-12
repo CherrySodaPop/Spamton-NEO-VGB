@@ -55,6 +55,8 @@ func _process(delta):
 		$BIGSHOT/loom.visible = false;
 	
 	if (toggleWalk):
+		$WRECK.visible = true;
+		$SPEW.visible = false;
 		wreckTimer += delta;
 		kromerTick += delta;
 		dustTick += delta;
@@ -96,6 +98,8 @@ func _process(delta):
 		moveSpeed = clamp(moveSpeed,-15,15);
 		$BIGSHOT.transform.origin.x += moveSpeed * delta;
 	elif ($BIGSHOT/HitBox.hitCount >= maxHitCount):
+		$WRECK.visible = false;
+		$SPEW.visible = true;
 		spewTimer += delta;
 		$BIGSHOT.transform.origin.x = lerp($BIGSHOT.transform.origin.x, 70.0, 2 * delta);
 		$BIGSHOT/head/default.visible = true;

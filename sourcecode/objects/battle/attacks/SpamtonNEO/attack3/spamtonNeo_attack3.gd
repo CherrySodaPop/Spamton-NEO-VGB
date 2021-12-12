@@ -1,6 +1,7 @@
 extends Node2D
 
 var lifeTimer:float = 0.0;
+var rung:bool = false;
 var desiredRotation:float = 110.0;
 var pipisTick:float = 0.0;
 var specialPipis:bool = true;
@@ -12,6 +13,10 @@ func _ready():
 
 func _process(delta):
 	lifeTimer += delta;
+	
+	if (lifeTimer >= 0.5 && !rung):
+		$ringring.playing = true;
+		rung = true;
 	
 	if (lifeTimer > 18.0):
 		get_tree().current_scene.get_node("spamtonNEO").ringring = false;

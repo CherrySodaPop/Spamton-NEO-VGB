@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://rooms/creditsAndMenu/creditsAndMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/IMAGES/FOUNTAIN.png" type="Texture" id=2]
+[ext_resource path="res://assets/materials/fountain.tres" type="Material" id=3]
+[ext_resource path="res://assets/shader/wave.tres" type="Shader" id=4]
+[ext_resource path="res://assets/fonts/themeMaxFont.tres" type="Theme" id=5]
+[ext_resource path="res://assets/IMAGES/IMAGE_USER_SOUL.png" type="Texture" id=6]
+[ext_resource path="res://assets/music/AUDIO_STORY.ogg" type="AudioStream" id=7]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 4 )
+shader_param/freq = 10.0
+shader_param/amp = 0.01
+
+[node name="creditsAndMenu" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Credits" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="Label" type="Label" parent="Credits"]
+margin_left = -66.0
+margin_top = -20.0
+margin_right = 67.0
+margin_bottom = -6.0
+theme = ExtResource( 5 )
+text = "DELTARUNE by Toby Fox"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Credits"]
+margin_left = -56.0
+margin_top = 6.0
+margin_right = 77.0
+margin_bottom = 20.0
+theme = ExtResource( 5 )
+text = "Recreation by Cherry"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="Fountain" type="Node2D" parent="Menu"]
+modulate = Color( 1, 1, 1, 0.490196 )
+position = Vector2( 0, 9 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="Fountain1" type="TextureRect" parent="Menu/Fountain"]
+modulate = Color( 1, 1, 1, 0.27451 )
+material = ExtResource( 3 )
+margin_left = -100.0
+margin_top = -62.0
+margin_right = 100.0
+margin_bottom = 51.0
+texture = ExtResource( 2 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fountain2" type="TextureRect" parent="Menu/Fountain"]
+material = SubResource( 1 )
+margin_left = -100.0
+margin_top = -62.0
+margin_right = 100.0
+margin_bottom = 51.0
+texture = ExtResource( 2 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="USER_SOUL" type="Sprite" parent="Menu"]
+position = Vector2( -30, -10 )
+texture = ExtResource( 6 )
+
+[node name="Label1" type="Label" parent="Menu"]
+margin_left = -15.0
+margin_top = -16.0
+margin_right = 30.0
+margin_bottom = -2.0
+theme = ExtResource( 5 )
+text = "Continue"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Menu"]
+margin_left = -15.0
+margin_top = 8.0
+margin_right = 52.0
+margin_bottom = 22.0
+theme = ExtResource( 5 )
+text = "End Program"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AUDIO_STORY" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )

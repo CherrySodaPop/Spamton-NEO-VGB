@@ -15,6 +15,7 @@ var animateWings:bool = true;
 var animateArms:bool = true;
 var animateLegs:bool = true;
 var rotationAmp:float = 1.0;
+var animateSpeed:float = 1.0;
 
 var ringring:bool = false;
 var ringringTimer:float = 0.0;
@@ -26,10 +27,23 @@ var chainedHeartSpringTimer:float = 0.0;
 var chainedHeartBounceDir:int = 0;
 var chainedHeartYOffset:int = 0;
 
+var activateNeo:bool = false;
+var neoTimer:float = 0.0;
+var neoFreq:float = 0.3;
+
+var activateSmoke:bool = false;
+var smokeTimer:float = 0.0;
+
 var infTimer:float = 0.0;
 var lifeTimer:float = 0.0;
 
-var effectWire = preload("res://objects/enemies/spamtonNEO/wireSnapped.tscn")
+var WHYYOULITTLE:bool = false;
+var WHYYOULITTLETimer:float = 0.0;
+
+var effectWire = preload("res://objects/enemies/spamtonNEO/wireSnapped.tscn");
+var effectSmoke = preload("res://objects/enemies/spamtonNEO/victorySmoke.tscn");
+var sndDamage = preload("res://objects/sounds/sndEnemyHurt.tscn");
+var sndOhYouveDoneItNow = preload("res://objects/sounds/sndOhYouveDoneItNow.tscn");
 
 func _ready():
 	pass # Replace with function body.
@@ -40,12 +54,55 @@ func _process(delta):
 	$spriteJoint/String2.points[0].x = sin(infTimer * 3) * 1.5;
 	$spriteJoint/String3.points[0].x = sin(infTimer * 2) * 1.5;
 	
+	if (WHYYOULITTLE):
+		activateSmoke = true;
+		$spriteJoint/headJoint.modulate.g = clamp($spriteJoint/headJoint.modulate.g - delta, 0.0, 1.0);
+		$spriteJoint/headJoint.modulate.b = clamp($spriteJoint/headJoint.modulate.b - delta, 0.0, 1.0);
+		if (WHYYOULITTLETimer == 0.0): get_tree().current_scene.add_child(sndOhYouveDoneItNow.instance());
+		WHYYOULITTLETimer += delta;
+		if (WHYYOULITTLETimer <= 1.25):
+			var calc = clamp((abs(sin(WHYYOULITTLETimer * 5.1)) * 1.5) + 1.0, 1.0, 2.5);
+			$spriteJoint/headJoint.scale.x = calc;
+			$spriteJoint/headJoint.scale.y = calc;
+		else:
+			$spriteJoint/headJoint.scale.x = 1.0;
+			$spriteJoint/headJoint.scale.y = 1.0;
+	else:
+		$spriteJoint/headJoint.modulate.g = clamp($spriteJoint/headJoint.modulate.g + delta, 0.0, 1.0);
+		$spriteJoint/headJoint.modulate.b = clamp($spriteJoint/headJoint.modulate.b + delta, 0.0, 1.0);
+		WHYYOULITTLETimer = 0.0;
+	
+	if (activateSmoke):
+		smokeTimer += delta;
+		if (smokeTimer >= 0.3):
+			var tmpObj = effectSmoke.instance();
+			get_tree().current_scene.add_child(tmpObj);
+			tmpObj.global_transform.origin = $spriteJoint.global_transform.origin;
+			smokeTimer = 0.0;
+	
+	if (activateNeo):
+		activateSmoke = true;
+		$spriteJoint.transform.origin.x = rand_range(-1,1);
+		$spriteJoint.transform.origin.y = rand_range(-1,1);
+		neoTimer += delta;
+		if (neoTimer >= neoFreq):
+			neoTimer = 0.0;
+			infTimer += rand_range(10,20);
+			$spriteJoint/headJoint/head.frame = randi() % 3;
+			rotationAmp = 5.0
+			animateBody = true;
+		else:
+			animateBody = false;
+	
 	if ((prevHealth != health) || (prevWireHealth != wireHealth)):
 		if (animateDamageTime == 0.75):
 			if (prevHealth != health):
+				$damage.playing = true;
 				infTimer += rand_range(10,20);
 				rotationAmp = 5.0
 			if (prevWireHealth != wireHealth):
+				$damage.playing = true;
+				$pacify.playing = true;
 				CreateBrokenWires()
 		else:
 			if (prevHealth != health): animateBody = false;
@@ -55,10 +112,10 @@ func _process(delta):
 		if (animateDamageTime <= 0.0):
 			prevHealth = health;
 			prevWireHealth = wireHealth;
-			animateBody = true;
+			if (health > 0): animateBody = true;
 			rotationAmp = 1.0
 			animateDamageTime = 0.75;
-		$spriteJoint.transform.origin.x = sin(lifeTimer*40) * (animateDamageTime / 0.75) * 4.0;
+		$spriteJoint.transform.origin.x = sin(lifeTimer*60) * (animateDamageTime / 0.75) * 4.0;
 	
 	if (ringring):
 		ringringTimer += delta
@@ -146,7 +203,8 @@ func _process(delta):
 		
 		if (animateBody):
 			$spriteJoint/headJoint/head.playing = true;
-			infTimer += delta;
+			infTimer += delta * animateSpeed;
+			$spriteJoint/headJoint/head.speed_scale = animateSpeed;
 			
 			if (animateTorso):
 				$spriteJoint/torsoJoint/torso.offset.y = (sin(infTimer * 4) * 1.5);
@@ -167,7 +225,7 @@ func _process(delta):
 				$spriteJoint/legRJoint.rotation = (sin(infTimer * 4.2) * 0.3 * rotationAmp);
 		else:
 			$spriteJoint/headJoint/head.playing = false;
-			$spriteJoint/headJoint/head.frame = 2;
+			if (!activateNeo): $spriteJoint/headJoint/head.frame = 2;
 	else:
 		$spriteJoint/chainedHeart.visible = true;
 		$spriteJoint/headJoint/head.playing = false;
@@ -213,6 +271,20 @@ func _process(delta):
 
 func ToggleAnimation():
 	animateBody = !animateBody;
+
+func ActivateEX():
+	var tmpObj = sndDamage.instance();
+	$wreck.playing = true;
+	get_tree().current_scene.add_child(tmpObj);
+	activateNeo = true;
+
+func TURN_UP_THE_JUICE():
+	$wreck.pitch_scale = 1.0;
+	neoFreq = 0.1;
+
+func Explode():
+	$wreck.playing = false;
+	$explode.playing = true;
 
 func CreateBrokenWires():
 	var tmpObj = effectWire.instance();

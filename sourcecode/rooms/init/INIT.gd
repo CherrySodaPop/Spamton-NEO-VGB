@@ -1,6 +1,6 @@
 extends Node2D
 
-var jevil_fight_force:bool = false;
+var jevil_fight_force:bool = false; # WARNING!!!!!!!!! VERY BUGGY! BIG WORK IN PROGRESS
 
 var BEGIN:bool = false;
 var HESITATE:float = 0.0;
@@ -86,3 +86,5 @@ func _process(delta):
 					get_tree().change_scene("res://rooms/spamtonNeoFight/spamtonFight.tscn");
 				if (USER_CHOICE == 1):
 					get_tree().quit();
+	if (jevil_fight_force):
+		get_tree().change_scene("res://rooms/jevilFight/jevilFight.tscn");

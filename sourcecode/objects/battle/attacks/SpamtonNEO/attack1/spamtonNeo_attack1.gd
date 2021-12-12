@@ -16,14 +16,14 @@ func _process(delta):
 	lifeTimer += delta;
 	var spamtonNEO = get_tree().current_scene.get_node("spamtonNEO");
 	
+	HandleVisualHeart(delta);
+	
 	if ($chainedHeartHitbox.hitCount >= 40):
 		get_tree().current_scene.get_node("spamtonNEO").chainedHeart = false;
 		get_tree().current_scene.get_node("spamtonNEO").chainedHeartSpringAmp = 1.0;
 		get_tree().current_scene.get_node("spamtonNEO/spriteJoint/chainedHeart/heart").visible = true;
 		get_tree().current_scene.ExitAttack();
 		queue_free();
-	
-	HandleVisualHeart(delta);
 	
 	$chainedHeartHitbox.global_transform.origin = spamtonNEO.get_node("spriteJoint/chainedHeart/heart").global_transform.origin;
 	

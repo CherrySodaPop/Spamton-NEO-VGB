@@ -5,6 +5,7 @@ var fireCannon:bool = false;
 var prevAimPipisState:bool = false;
 
 var projPipisCannon = preload("res://objects/battle/projectiles/SpamtonNEO/projSpamtonPipisCannon.tscn");
+var sndBigShot = preload("res://objects/sounds/sndBigShot.tscn")
 
 func _ready():
 	get_tree().current_scene.get_node("USER_SOUL_BOX/Normal").visible = false;
@@ -27,7 +28,9 @@ func _process(delta):
 			SPAMTONNEO.get_node("spriteJoint").transform.origin.x = (sin(lifeTimer*2) * 15) + 5
 			SPAMTONNEO.get_node("spriteJoint").transform.origin.y = (sin(lifeTimer*3) * 20)
 		if (SPAMTONNEO.aimPipisState != prevAimPipisState):
-			var tmpObj = projPipisCannon.instance();
+			var tmpObj = sndBigShot.instance();
+			get_tree().current_scene.add_child(tmpObj);
+			tmpObj = projPipisCannon.instance();
 			add_child(tmpObj);
 			tmpObj.global_transform.origin = SPAMTONNEO.get_node("spriteJoint/armRJoint").global_transform.origin;
 			tmpObj.moveDir = (USERSOUL.global_transform.origin - SPAMTONNEO.get_node("spriteJoint/armRJoint").global_transform.origin).normalized() * 80;

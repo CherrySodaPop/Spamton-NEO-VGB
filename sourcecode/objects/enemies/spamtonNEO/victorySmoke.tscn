@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/enemies/spamtonNEO/victorySmoke.gd" type="Script" id=1]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_spamtonVictorySmoke.png" type="Texture" id=2]
+
+[node name="victorySmoke" type="Sprite"]
+z_index = -1
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

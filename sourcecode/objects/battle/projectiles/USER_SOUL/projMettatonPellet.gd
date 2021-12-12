@@ -12,6 +12,7 @@ func _process(delta):
 	lifeTimer += delta;
 	transform.origin.x += 120.0 * delta;
 	if (lifeTimer >= 6.0): queue_free();
+	if (global_transform.origin.x >= 90): queue_free();
 
 func _TouchingArea(area:Area2D):
 	if (area.has_meta("projectileType") && area.get_meta("projectileType") == "ENEMY"):

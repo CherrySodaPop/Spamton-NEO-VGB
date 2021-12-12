@@ -2,11 +2,14 @@ extends Area2D
 
 var specialPipis:bool = false;
 var moveSpeed:Vector2 = Vector2.ZERO;
+var prevHitCount:int = 0;
 var hitCount:int = 0;
 var lifeTimer:float = 0.0;
 var bounceFactor:float = 0.0;
+var chargeHit = false;
 
 var MYHEAD = preload("res://objects/battle/projectiles/SpamtonNEO/projSpamtonHead.tscn");
+var sndHit = preload("res://objects/sounds/sndEnemyHurt.tscn");
 
 func _ready():
 	set_meta("projectileType", "ENEMY");
@@ -33,6 +36,13 @@ func _process(delta):
 	moveSpeed.y = clamp(moveSpeed.y,-120,120);
 	
 	transform.origin += moveSpeed * delta;
+	
+	if (prevHitCount != hitCount):
+		var tmpObj = sndHit.instance();
+		get_tree().current_scene.add_child(tmpObj);
+		if (chargeHit): hitCount += 2;
+		chargeHit = false;
+		prevHitCount = hitCount;
 	
 	# MY [EGGS]!
 	if (hitCount > 2):

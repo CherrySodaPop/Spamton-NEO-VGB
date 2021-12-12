@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/soulTurn.ogg-e8a85bf8d206ab949007a90f60d0200a.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/soulTurn.ogg"
+dest_files=[ "res://.import/soulTurn.ogg-e8a85bf8d206ab949007a90f60d0200a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

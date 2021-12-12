@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pacify.ogg-83e45c3523c3020a00e4ccffbcc8f3fb.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/pacify.ogg"
+dest_files=[ "res://.import/pacify.ogg-83e45c3523c3020a00e4ccffbcc8f3fb.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

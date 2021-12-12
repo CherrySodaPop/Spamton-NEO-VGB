@@ -12,6 +12,7 @@ var damaged:bool = false;
 var damageMultiplier:float = 1.0;
 var invisTimer:float = 0.0;
 var flashTimer:float = 0.0;
+var guard:bool = false;
 
 var movementActionStrength:float = 0.2;
 var speed = 60;
@@ -22,15 +23,19 @@ var startMettatonFightTimer:float = 0.0;
 var projMettaton = preload("res://objects/battle/projectiles/USER_SOUL/projMettatonPellet.tscn");
 var projMettatonCharged = preload("res://objects/battle/projectiles/USER_SOUL/projMettatonPelletCharged.tscn");
 
+var SOUL_TURNED:bool = false;
+var SOUL_SHINED:bool = false;
 var SOUL_SHINE = preload("res://objects/battle/USER_SOUL/USER_SOUL_SHINE.tscn");
 var WAITING_FOR_USER:bool = false;
 var WAITING_FOR_USER_COUNT:int = 0;
 var WAITING_FOR_USER_TOTAL_COUNT:int = 0;
 
 func _ready():
-	$HitboxCollision.connect("area_entered",self,"_TouchingArea");
+	$HitboxCollisionSoul.connect("area_entered",self,"_TouchingArea");
 
 func _process(delta):
+	
+	health = clamp(health, -INF, healthMax);
 	
 	if (damaged):
 		if (invisTimer == 0.0): $soulHurt.playing = true;
@@ -75,7 +80,10 @@ func HandleMovement(delta):
 
 func HandleShooting(delta):
 	zapTimer += delta;
-	$soulCharge.pitch_scale = clamp((chargeTimer- 0.1) / 0.4, 0.01, 1.0);
+	$soulCharge.pitch_scale = clamp((chargeTimer - 0.1) / 0.4, 0.01, 1.0);
+	
+	$spriteJoint/glow.scale.x = (abs(sin(chargeTimer * 10.0) * 3)) * clamp(chargeTimer,0.0,1.0);
+	$spriteJoint/glow.scale.y = (abs(sin(chargeTimer * 10.0) * 3)) * clamp(chargeTimer,0.0,1.0);
 	
 	if ($soulCharge.pitch_scale <= 0.01):
 		$soulCharge.volume_db = -80.0;
@@ -83,10 +91,10 @@ func HandleShooting(delta):
 		$soulCharge.volume_db = 0;
 	
 	if (canShoot && !disableSoul):
-		if (Input.is_action_pressed("confirm")):
+		if (Input.is_action_pressed("zapKey")):
 			chargeTimer += delta;
 		
-		if (Input.is_action_just_released("confirm")):
+		if (Input.is_action_just_released("zapKey")):
 			# default shooting
 			if (zapTimer >= 0.1 && chargeTimer <= 0.5):
 				var tmpObj = projMettaton.instance();
@@ -102,7 +110,14 @@ func HandleShooting(delta):
 				tmpObj.global_transform.origin = global_transform.origin + Vector2(4,0);
 				tmpObj.z_index = z_index;
 			
-			chargeTimer = 0.0;
+			if (!Input.is_action_pressed("zapKeyBroken")): chargeTimer = 0.0;
+		
+		if (Input.is_action_just_pressed("zapKeyBroken") && chargeTimer > 0.5):
+			# HEY QUIT THAT!
+			var tmpObj = projMettatonCharged.instance();
+			get_tree().current_scene.add_child(tmpObj);
+			tmpObj.global_transform.origin = global_transform.origin + Vector2(4,0);
+			tmpObj.z_index = z_index;
 	else:
 		chargeTimer = 0.0;
 
@@ -115,13 +130,22 @@ func DisableBattle():
 	disableSoul = true;
 	disableMovement = true;
 	visible = false;
+	guard = false;
 
 func HandleMettatonFight(delta):
 	if (startMettatonFight):
+		if (!SOUL_TURNED):
+			$soulTurn.playing = true;
+			SOUL_TURNED = true;
 		$spriteJoint.rotation = lerp($spriteJoint.rotation,deg2rad(-90),0.5);
 		startMettatonFightTimer += delta;
 		
 	if (startMettatonFightTimer > 1.5):
+		if (!SOUL_SHINED):
+			Persistant.get_node("controllerCamera").shakeAmp = 3.0;
+			$soulShine.playing = true;
+			add_child(SOUL_SHINE.instance());
+			SOUL_SHINED = true;
 		$spriteJoint/sprite.animation = "SOUL_METTATON";
 
 func AlphysPhoneCallActivate():
@@ -133,7 +157,7 @@ func _TouchingArea(area:Area2D):
 	if (area && area.has_meta("projectileType") && area.get_meta("projectileType") == "ENEMY"):
 		if (!damaged):
 			if (area.has_meta("damageAmount")):
-				health -= int(area.get_meta("damageAmount") * damageMultiplier);
+				health -= int((area.get_meta("damageAmount") * damageMultiplier) / ( 1.0 + float(guard)) );
 			Persistant.get_node("controllerCamera").shakeAmp = 2.0;
 			damaged = true;
 
@@ -144,12 +168,12 @@ func WAIT_FOR_USER():
 
 func WAITING_FOR_USER(delta):
 	if (WAITING_FOR_USER):
-		if (WAITING_FOR_USER_COUNT == 5 && WAITING_FOR_USER_TOTAL_COUNT != 15):
+		if (WAITING_FOR_USER_COUNT == 4 && WAITING_FOR_USER_TOTAL_COUNT <= 8):
 			canShoot = false;
 			get_tree().current_scene.get_node("AnimationPlayer").play("intro");
 			WAITING_FOR_USER = false;
 			WAITING_FOR_USER_COUNT = 0;
-		if (!get_tree().current_scene.get_node("AnimationPlayer").is_playing() && WAITING_FOR_USER_TOTAL_COUNT == 15):
+		if (!get_tree().current_scene.get_node("AnimationPlayer").is_playing() && WAITING_FOR_USER_TOTAL_COUNT == 13):
 			WAITING_FOR_USER = false;
 			get_tree().current_scene.get_node("spamtonNEO").aimPipis = false;
 			get_tree().current_scene.get_node("spamtonLaugh").playing = true;

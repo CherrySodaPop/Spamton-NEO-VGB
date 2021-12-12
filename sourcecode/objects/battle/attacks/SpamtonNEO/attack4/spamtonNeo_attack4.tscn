@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://objects/battle/attacks/SpamtonNEO/attack4/spamtonNeo_attack4.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/spamtonNEO/spr_bigshotFull.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://assets/characters/spamtonNEO/spr_bigshotYumKromer.png" type="Texture" id=7]
 [ext_resource path="res://objects/battle/attacks/SpamtonNEO/attack4/spamtonHead.gd" type="Script" id=8]
 [ext_resource path="res://assets/sounds/explosion.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_mettatonREW.png" type="Texture" id=10]
+[ext_resource path="res://assets/characters/spamtonNEO/spr_mettatonREC.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.5, 72.5 )
@@ -80,3 +82,13 @@ shape = SubResource( 1 )
 [node name="explosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = 9.455
+
+[node name="WRECK" type="Sprite" parent="."]
+visible = false
+position = Vector2( -55, 38 )
+texture = ExtResource( 11 )
+
+[node name="SPEW" type="Sprite" parent="."]
+visible = false
+position = Vector2( -56, 38 )
+texture = ExtResource( 10 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/AUDIO_STORY.ogg-9684c902924bcc56c190ed10b4e33cda.oggstr"
+
+[deps]
+
+source_file="res://assets/music/AUDIO_STORY.ogg"
+dest_files=[ "res://.import/AUDIO_STORY.ogg-9684c902924bcc56c190ed10b4e33cda.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

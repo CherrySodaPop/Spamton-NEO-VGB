@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dogcheck.ogg-c2e103ca98730673fef0b7952056ca3f.oggstr"
+
+[deps]
+
+source_file="res://assets/music/dogcheck.ogg"
+dest_files=[ "res://.import/dogcheck.ogg-c2e103ca98730673fef0b7952056ca3f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
